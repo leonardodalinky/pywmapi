@@ -27,7 +27,7 @@ For now, the implemented function is listed below:
   * [x] get statistics of an item
 * profile
   * [ ] create an order
-* Liches
+* liches
   * [ ] list all lich weapons
   * [ ] list all lich ephemeras
   * [ ] list all lich quirks
@@ -41,8 +41,6 @@ For now, the implemented function is listed below:
 * auction entry
   * [ ] get info about auction by auction id
   * [ ] get auction bids by auction id
-
-Feel free to make any issue or PR! 😊
 
 ## Installation
 
@@ -80,24 +78,23 @@ Another way to get `url_name` for an item is through the `items.list_items()` fu
 
 ### Examples
 
-To list all of the tradable items:
+First, we import the package as:
 ```python
 import pywmapi as wm
+```
 
+To list all of the tradable items:
+```python
 wm.items.list_items()
 ```
 
 To get the info for any item with its `url_name`:
 ```python
-import pywmapi as wm
-
 wm.items.get_item("chroma_prime_systems")
 ```
 
 To get the orders of a specific item:
 ```python
-import pywmapi as wm
-
 wm.items.get_orders("chroma_prime_systems")
 ```
 
@@ -105,3 +102,21 @@ To get the statistics of historical prices of any item:
 ```python
 wm.statistics.get_statistic("chroma_prime_systems")
 ```
+
+Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.
+
+## Contributing
+Feel free to make any issue or PR! 😊
+
+*Or contact me in game!*
+
+## Donating
+
+Any sort of donation in game would be appretiated.
+
+Contact me in game:
+```
+/w AyajiLin Hi! ${Your words here}.
+```
+
+🤣 *Relics or 5 platinums would be enough.*
