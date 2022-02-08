@@ -5,3 +5,4 @@ pytest
 twine
 sphinx
 black
+build
