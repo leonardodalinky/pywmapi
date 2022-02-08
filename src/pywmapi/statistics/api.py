@@ -1,13 +1,25 @@
 import requests
 from typing import Dict, List, Optional, Tuple
 
-from common import *
+from ..common import *
 from .models import *
 
 
-def get_statistic(
-    url_name: str, platform: Optional[Platform] = Platform.pc
-) -> Statistic:
+__all__ = [
+    "get_statistic",
+]
+
+
+def get_statistic(url_name: str, platform: Optional[Platform] = Platform.pc) -> Statistic:
+    """Get statistic of an item
+
+    Args:
+        url_name (str): unique name for an item
+        platform (Optional[Platform], optional): platform. Defaults to Platform.pc.
+
+    Returns:
+        Statistic: statistic over the past 48h/90d period
+    """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/statistics",
         headers={"Platform": platform.value if platform is not None else None},

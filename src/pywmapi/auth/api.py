@@ -3,11 +3,23 @@ from typing import Optional, Tuple
 from enum import Enum
 from bs4 import BeautifulSoup
 
-from common import *
+from ..common import *
 from .models import *
 
 
+__all__ = [
+    "get_csrf_and_jwt",
+    "SigninAuthtype",
+    "signin",
+]
+
+
 def get_csrf_and_jwt() -> Tuple[str, str]:
+    """Get csrf token and jwt token
+
+    Returns:
+        Tuple[str, str]: csrf & jwt
+    """
     # get csrf_token first
     res = requests.get(HOMEPAGE_URL)
     soup = BeautifulSoup(res.text, features="html.parser")
@@ -17,7 +29,7 @@ def get_csrf_and_jwt() -> Tuple[str, str]:
     return csrf_token, jwt
 
 
-class SigninAuthtype(str, Enum):
+class SigninAuthtype(Enum):
     cookie = "cookie"
     header = "header"
 
@@ -28,6 +40,17 @@ def signin(
     device_id: Optional[str] = None,
     auth_type: Optional[SigninAuthtype] = SigninAuthtype.cookie,
 ) -> Session:
+    """Login to the account
+
+    Args:
+        email (str): email address for signin
+        password (str): password
+        device_id (Optional[str], optional): used to identify different devices. Defaults to None.
+        auth_type (Optional[SigninAuthtype], optional): type of authentication. Defaults to SigninAuthtype.cookie.
+
+    Returns:
+        Session: session for the login state
+    """
     csrf_token, jwt = get_csrf_and_jwt()
     res = requests.post(
         API_BASE_URL + "/auth/signin",
@@ -35,7 +58,7 @@ def signin(
             "email": email,
             "password": password,
             "device_id": device_id,
-            "auth_type": auth_type,
+            "auth_type": auth_type.value if auth_type is not None else None,
         },
         headers={"x-csrftoken": csrf_token},
         cookies={"JWT": jwt},

@@ -1,4 +1,4 @@
-from .api import *
+from pywmapi.auth.api import *
 
 
 def test_csrf():

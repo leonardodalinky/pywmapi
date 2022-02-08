@@ -1,15 +1,21 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
 from typing import Dict, Any, Optional, List
 from dacite import Config
 
-from common import *
-from lang.models import LangInItem
-from auth.models import UserShort
+from ..common import *
+from ..lang.models import LangInItem
+from ..auth.models import UserShort
 
 
-__all__ = ["ItemShort", "ItemFull", "OrderCommon", "OrderRow"]
+__all__ = [
+    "ItemShort",
+    "ItemFull",
+    "OrderCommon",
+    "OrderRow",
+    # "OrderFull",
+]
 
 
 @dataclass
@@ -82,4 +88,5 @@ class OrderRow(OrderCommon):
 @dataclass
 class OrderFull(OrderRow):
     # TODO
-    pass
+    def __init__(self):
+        raise NotImplementedError()

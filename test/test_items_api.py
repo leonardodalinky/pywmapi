@@ -1,4 +1,5 @@
-from .api import *
+from pywmapi.common import *
+from pywmapi.items import *
 
 
 def test_list_items():

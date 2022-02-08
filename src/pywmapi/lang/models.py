@@ -3,7 +3,12 @@ from enum import Enum
 from typing import Dict, Any, Optional, List
 from dacite import Config
 
-from common import *
+from ..common import *
+
+
+__all__ = [
+    "LangInItem",
+]
 
 
 @dataclass

@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Dict, Any, Optional
 from dacite import Config
 
-from common import *
+from ..common import *
 
 
 __all__ = [
@@ -44,11 +44,6 @@ class User(ModelBase):
         moderator = "moderator"
         admin = "admin"
 
-    class Platform(Enum):
-        ps4 = "ps4"
-        pc = "pc"
-        xbox = "xbox"
-
     class PatreonBadge(Enum):
         bronze = "bronze"
         gold = "gold"
@@ -75,7 +70,7 @@ class User(ModelBase):
     ingame_name: str
     check_code: str
     patreon_profile: Optional[PatreonProfile]
-    platform: str
+    platform: Platform
     region: str
     banned: bool
     ban_reason: Optional[str]

@@ -1,11 +1,25 @@
 import requests
 from typing import Dict, List, Optional, Tuple, Union
 
-from common import *
+from ..common import *
 from .models import *
+
+__all__ = [
+    "list_items",
+    "get_item",
+    "get_orders",
+]
 
 
 def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
+    """List all the tradable items in wm's databases
+
+    Args:
+        lang (Optional[Language], optional): addition language support. Defaults to Language.en.
+
+    Returns:
+        List[ItemShort]: items
+    """
     res = requests.get(
         API_BASE_URL + "/items",
         headers={"Language": lang.value if lang is not None else None},
@@ -17,6 +31,15 @@ def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
 def get_item(
     url_name: str, platform: Optional[Platform] = Platform.pc
 ) -> Tuple[ItemFull, List[ItemFull]]:
+    """Get info of an item
+
+    Args:
+        url_name (str): unique name for an item
+        platform (Optional[Platform], optional): platform. Defaults to Platform.pc.
+
+    Returns:
+        Tuple[ItemFull, List[ItemFull]]: the first is the target item; the second is the whole set of items containing the target item
+    """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}",
         headers={"Platform": platform.value if platform is not None else None},
@@ -31,6 +54,21 @@ def get_orders(
     platform: Optional[Platform] = Platform.pc,
     include: Optional[IncludeOption] = None,
 ) -> Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
+    """Get orders of an item
+
+    Args:
+        url_name (str): unique name for an item
+        platform (Optional[Platform], optional): platform. Defaults to Platform.pc.
+        include (Optional[IncludeOption], optional):
+            additional info.
+            If IncludeOption.item is set, the info of the item will be returned additionaly.
+            Defaults to None.
+
+    Returns:
+        Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
+            The first is the order list.
+            If IncludeOption.item is set, the same result of get_item method will be returned as the 2nd and 3rd return value.
+    """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/orders",
         params={"include": include.value if include is not None else None},

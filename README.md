@@ -1,8 +1,10 @@
 # pywmapi
 
-PYthon Warframe Market API(pywmapi)
+**PY**thon **W**arframe **M**arket **API**(pywmapi)
 
-API for warframe market, written in Python.
+🔥 API for warframe market, written in Python.
+
+> *"Thank you tinsuit, a fine trade. Transaction complete, haha!" -- Maroo*
 
 For now, the implemented function is listed below:
 
@@ -33,15 +35,15 @@ For now, the implemented function is listed below:
   * [ ] get info about auction by auction id
   * [ ] get auction bids by auction id
 
-## Installation
+Feel free to make any issue or PR! 😊
 
-*Not uploaded yet*
+## Installation
 
 ```
 pip install pywmapi
 ```
 
-The version of Python **MUST** greater than **3.6**.
+The version of Python **MUST >= 3.7** since `dataclasses` is used.
 
 ## Guidance
 
@@ -61,4 +63,38 @@ For items maniplation, look up the `items` package.
 
 For getting statistics of items, look up the `statistics` package.
 
-*More functionalities is coming!*
+💪 *More functionalities is coming!*
+
+🏗️ *Better documentation is under construction!*
+
+The param `url_name` of some functions is regarded as the unique name for each item. For instance, if I search for the item *Chroma Prime Systems* on warframe market, the url for this page become *https://warframe.market/items/chroma_prime_systems*. And the last part of this url string is exactly the `url_name` for this item, i.e. `chroma_prime_systems`!
+
+Another way to get `url_name` for an item is through the `items.list_items()` function.
+
+### Examples
+
+To list all of the tradable items:
+```python
+import pywmapi as wm
+
+wm.items.list_items()
+```
+
+To get the info for any item with its `url_name`:
+```python
+import pywmapi as wm
+
+wm.items.get_item("chroma_prime_systems")
+```
+
+To get the orders of a specific item:
+```python
+import pywmapi as wm
+
+wm.items.get_orders("chroma_prime_systems")
+```
+
+To get the statistics of historical prices of any item:
+```python
+wm.statistics.get_statistic("chroma_prime_systems")
+```

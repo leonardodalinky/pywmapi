@@ -1,4 +1,4 @@
-from .api import *
+from pywmapi.statistics.api import *
 
 
 def test_get_statistic():
