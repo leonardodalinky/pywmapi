@@ -1,5 +1,12 @@
 # pywmapi
 
+![github action packaging test badge](https://img.shields.io/github/workflow/status/leonardodalinky/pywmapi/Python%20package%20test/main?label=main)
+![pypi package version badge](https://img.shields.io/pypi/v/pywmapi)
+![python version badge](https://img.shields.io/badge/python-%3E%3D3.7-blue)
+![license badge](https://img.shields.io/github/license/leonardodalinky/pywmapi)
+![star badge](https://img.shields.io/github/stars/leonardodalinky/pywmapi?style=social)
+
+
 **PY**thon **W**arframe **M**arket **API**(pywmapi)
 
 🔥 API for warframe market, written in Python.
