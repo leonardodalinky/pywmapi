@@ -1,10 +1,10 @@
 # pywmapi
 
-![github action packaging test badge](https://img.shields.io/github/workflow/status/leonardodalinky/pywmapi/Python%20package%20test/main?label=main)
-![pypi package version badge](https://img.shields.io/pypi/v/pywmapi)
+[![github action packaging test badge](https://img.shields.io/github/workflow/status/leonardodalinky/pywmapi/Python%20package%20test/main?label=main)](https://github.com/leonardodalinky/pywmapi/tree/main)
+[![pypi package version badge](https://img.shields.io/pypi/v/pywmapi)](https://pypi.org/project/pywmapi/)
 ![python version badge](https://img.shields.io/badge/python-%3E%3D3.7-blue)
-![license badge](https://img.shields.io/github/license/leonardodalinky/pywmapi)
-![star badge](https://img.shields.io/github/stars/leonardodalinky/pywmapi?style=social)
+[![license badge](https://img.shields.io/github/license/leonardodalinky/pywmapi)](https://github.com/leonardodalinky/pywmapi/blob/main/LICENSE)
+[![star badge](https://img.shields.io/github/stars/leonardodalinky/pywmapi?style=social)](https://github.com/leonardodalinky/pywmapi)
 
 
 **PY**thon **W**arframe **M**arket **API**(pywmapi)
