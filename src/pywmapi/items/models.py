@@ -29,7 +29,7 @@ class ItemShort(ModelBase):
 @dataclass
 class ItemFull(ModelBase):
     @dataclass
-    class Rarity(Enum):
+    class Rarity(str, Enum):
         common = "common"
         uncommon = "uncommon"
         rare = "rare"

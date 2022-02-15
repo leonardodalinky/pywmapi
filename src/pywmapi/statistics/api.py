@@ -22,7 +22,7 @@ def get_statistic(url_name: str, platform: Optional[Platform] = Platform.pc) -> 
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/statistics",
-        headers={"Platform": platform.value if platform is not None else None},
+        headers={"Platform": platform},
     )
     res.raise_for_status()
     payload = res.json()["payload"]

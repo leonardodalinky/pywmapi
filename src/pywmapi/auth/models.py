@@ -22,7 +22,7 @@ class Session:
 
 @dataclass
 class UserShort:
-    class Status(Enum):
+    class Status(str, Enum):
         ingame = "ingame"
         online = "online"
         offline = "offline"
@@ -38,13 +38,13 @@ class UserShort:
 
 @dataclass
 class User(ModelBase):
-    class Role(Enum):
+    class Role(str, Enum):
         anonymous = "anonymous"
         user = "user"
         moderator = "moderator"
         admin = "admin"
 
-    class PatreonBadge(Enum):
+    class PatreonBadge(str, Enum):
         bronze = "bronze"
         gold = "gold"
         silver = "silver"

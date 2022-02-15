@@ -29,7 +29,7 @@ def get_csrf_and_jwt() -> Tuple[str, str]:
     return csrf_token, jwt
 
 
-class SigninAuthtype(Enum):
+class SigninAuthtype(str, Enum):
     cookie = "cookie"
     header = "header"
 
@@ -58,7 +58,7 @@ def signin(
             "email": email,
             "password": password,
             "device_id": device_id,
-            "auth_type": auth_type.value if auth_type is not None else None,
+            "auth_type": auth_type,
         },
         headers={"x-csrftoken": csrf_token},
         cookies={"JWT": jwt},

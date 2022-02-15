@@ -22,7 +22,7 @@ def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
     """
     res = requests.get(
         API_BASE_URL + "/items",
-        headers={"Language": lang.value if lang is not None else None},
+        headers={"Language": lang},
     )
     res.raise_for_status()
     return list(map(lambda x: ItemShort.from_dict(x), res.json()["payload"]["items"]))
@@ -42,7 +42,7 @@ def get_item(
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}",
-        headers={"Platform": platform.value if platform is not None else None},
+        headers={"Platform": platform},
     )
     res.raise_for_status()
     item_json = res.json()["payload"]["item"]
@@ -71,8 +71,8 @@ def get_orders(
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/orders",
-        params={"include": include.value if include is not None else None},
-        headers={"Platform": platform.value if platform is not None else None},
+        params={"include": include},
+        headers={"Platform": platform},
     )
     json_obj = res.json()
     orders = list(map(lambda x: OrderRow.from_dict(x), json_obj["payload"]["orders"]))

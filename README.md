@@ -32,8 +32,8 @@ For now, the implemented function is listed below:
   * [ ] list all lich ephemeras
   * [ ] list all lich quirks
 * rivens
-  * [ ] list all riven items
-  * [ ] get a list of riven attributes
+  * [x] list all riven items
+  * [x] get a list of riven attributes
 * auctions
   * [ ] create auction
   * [ ] get a list of riven auctions by given search params
@@ -104,6 +104,10 @@ wm.statistics.get_statistic("chroma_prime_systems")
 ```
 
 Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.
+
+## Reference
+
+[Warframe market official API documentation](https://warframe.market/api_docs)
 
 ## Contributing
 Feel free to make any issue or PR! 😊
