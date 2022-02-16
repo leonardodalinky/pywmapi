@@ -1,11 +1,12 @@
-import requests
-from typing import Optional, Tuple
 from enum import Enum
+from typing import Optional, Tuple
+
+import requests
 from bs4 import BeautifulSoup
 
 from ..common import *
+from ..exceptions import *
 from .models import *
-
 
 __all__ = [
     "get_csrf_and_jwt",
@@ -64,13 +65,13 @@ def signin(
         headers={"x-csrftoken": csrf_token},
         cookies={"JWT": jwt},
     )
-    res.raise_for_status()
+    check_wm_response(res)
     user = User.from_dict(res.json()["payload"]["user"])
     return Session(jwt, user)
 
 
 def restore(email: str) -> None:
-    """Recieve mail with the new password, short after api call
+    """(CAUTION)Recieve mail with the new password, short after api call
 
     Args:
         email (str): email address
@@ -85,4 +86,4 @@ def restore(email: str) -> None:
         headers={"x-csrftoken": csrf_token},
         cookies={"JWT": jwt},
     )
-    res.raise_for_status()
+    check_wm_response(res)

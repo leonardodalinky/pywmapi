@@ -19,14 +19,29 @@ For now, the implemented function is listed below:
   * ✅ sign in
   * 🆖 register
   * 🆖 restore password
+* profile
+  * 🔲 get current user's profile
+  * 🔲 manage current user profile
+  * 🔲 get a user's profile
+  * 🔲 get all of a user's achievements
+  * 🔲 get all of a user's reviews
 * items
   * ✅ list all tradable items
   * ✅ get info about an item
   * ✅ get list of orders of an item
 * statistics
   * ✅ get statistics of an item
-* profile
-  * 🔲 create an order
+  * 🔲 get global market statistics
+* orders
+  * 🔲 get orders of a single item
+  * 🔲 get orders for the last 4 hours
+  * 🔲 get individual order from current profile
+  * 🔲 update a single order on the current profile
+  * 🔲 delete a single order on the current profile
+  * 🔲 add a new order for the current profile
+  * 🔲 get all of the current profile's orders
+  * 🔲 get user's sale statistics(closed orders)
+  * 🔲 get all of a user's orders
 * liches
   * ✅ list all lich weapons
   * ✅ list all lich ephemeras
@@ -112,6 +127,8 @@ Some of these function may have various optional params, such as `platform`, `la
 ## Reference
 
 [Warframe market official API documentation](https://warframe.market/api_docs)
+[WFCD/market-api-spec](https://github.com/WFCD/market-api-spec)
+[Public WM API](https://docs.google.com/document/d/1121cjBNN4BeZdMBGil6Qbuqse-sWpEXPpitQH5fb_Fo)
 
 ## Contributing
 Feel free to make any issue or PR! 😊

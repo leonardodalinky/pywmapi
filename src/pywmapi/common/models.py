@@ -1,8 +1,8 @@
-from typing import Dict, Any, Optional, Type, TypeVar
-from dacite import from_dict, Config
-from enum import Enum
 from datetime import datetime
+from enum import Enum
+from typing import Any, Dict, Optional, Type, TypeVar
 
+from dacite import Config, from_dict
 
 T = TypeVar("T")
 

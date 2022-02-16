@@ -6,3 +6,4 @@ twine
 sphinx
 black
 build
+isort

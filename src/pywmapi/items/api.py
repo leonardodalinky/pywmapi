@@ -1,7 +1,9 @@
-import requests
 from typing import Dict, List, Optional, Tuple, Union
 
+import requests
+
 from ..common import *
+from ..exceptions import *
 from .models import *
 
 __all__ = [
@@ -24,7 +26,7 @@ def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
         API_BASE_URL + "/items",
         headers={"Language": lang},
     )
-    res.raise_for_status()
+    check_wm_response(res)
     return list(map(lambda x: ItemShort.from_dict(x), res.json()["payload"]["items"]))
 
 
@@ -44,7 +46,7 @@ def get_item(
         API_BASE_URL + f"/items/{url_name}",
         headers={"Platform": platform},
     )
-    res.raise_for_status()
+    check_wm_response(res)
     item_json = res.json()["payload"]["item"]
     return _transform_item_result(item_json)
 
@@ -74,6 +76,7 @@ def get_orders(
         params={"include": include},
         headers={"Platform": platform},
     )
+    check_wm_response(res)
     json_obj = res.json()
     orders = list(map(lambda x: OrderRow.from_dict(x), json_obj["payload"]["orders"]))
     if include == IncludeOption.item:
