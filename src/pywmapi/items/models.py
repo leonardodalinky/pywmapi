@@ -5,16 +5,12 @@ from typing import Any, Dict, List, Optional
 
 from dacite import Config
 
-from ..auth.models import UserShort
 from ..common import *
 from ..lang.models import LangInItem
 
 __all__ = [
     "ItemShort",
     "ItemFull",
-    "OrderCommon",
-    "OrderRow",
-    # "OrderFull",
 ]
 
 
@@ -64,28 +60,3 @@ class ItemFull(ModelBase):
     es: Optional[LangInItem]
     it: Optional[LangInItem]
     pl: Optional[LangInItem]
-
-
-@dataclass
-class OrderCommon(ModelBase):
-    id: str
-    platinum: int
-    quantity: int
-    order_type: OrderType
-    platform: Platform
-    region: Optional[str]
-    creation_date: datetime
-    last_update: datetime
-    visible: bool
-
-
-@dataclass
-class OrderRow(OrderCommon):
-    user: UserShort
-
-
-@dataclass
-class OrderFull(OrderRow):
-    # TODO
-    def __init__(self):
-        raise NotImplementedError()

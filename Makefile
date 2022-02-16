@@ -66,7 +66,7 @@ black:
 
 .PHONY: isort
 isort:
-	${PYTHON} -m ${ISORT} --profile black ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${ISORT} --profile black -m 3 -l 80 ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: uninstall
 uninstall:

@@ -20,20 +20,19 @@ For now, the implemented function is listed below:
   * 🆖 register
   * 🆖 restore password
 * profile
-  * 🔲 get current user's profile
+  * ✅ get current user's profile
   * 🔲 manage current user profile
-  * 🔲 get a user's profile
+  * ✅ get a user's profile
   * 🔲 get all of a user's achievements
   * 🔲 get all of a user's reviews
 * items
   * ✅ list all tradable items
   * ✅ get info about an item
-  * ✅ get list of orders of an item
 * statistics
   * ✅ get statistics of an item
   * 🔲 get global market statistics
 * orders
-  * 🔲 get orders of a single item
+  * ✅ get orders of a single item
   * 🔲 get orders for the last 4 hours
   * 🔲 get individual order from current profile
   * 🔲 update a single order on the current profile
@@ -76,16 +75,23 @@ package of pywmapi is structured as:
 .
 ├── auth
 ├── common
+├── exceptions
 ├── items
 ├── lang
+├── liches
+├── orders
+├── profile
+├── rivens
 └── statistics
 ```
 
-For authentication, look up the `auth` package.
-
-For items maniplation, look up the `items` package.
-
-For getting statistics of items, look up the `statistics` package.
+* `auth`: authentication such as signin
+* `items`: item related
+* `liches` lich related
+* `orders`: orders maniplation
+* `profile`: user profile maniplation
+* `rivens`: riven related
+* `statistics`: statistics of items
 
 💪 *More functionalities is coming!*
 

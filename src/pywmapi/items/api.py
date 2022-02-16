@@ -1,4 +1,5 @@
 from typing import Dict, List, Optional, Tuple, Union
+from warnings import warn
 
 import requests
 
@@ -9,7 +10,6 @@ from .models import *
 __all__ = [
     "list_items",
     "get_item",
-    "get_orders",
 ]
 
 
@@ -51,39 +51,14 @@ def get_item(
     return _transform_item_result(item_json)
 
 
-def get_orders(
-    url_name: str,
-    platform: Optional[Platform] = Platform.pc,
-    include: Optional[IncludeOption] = None,
-) -> Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
-    """Get orders of an item
-
-    Args:
-        url_name (str): unique name for an item
-        platform (Optional[Platform], optional): platform. Defaults to Platform.pc.
-        include (Optional[IncludeOption], optional):
-            additional info.
-            If IncludeOption.item is set, the info of the item will be returned additionaly.
-            Defaults to None.
-
-    Returns:
-        Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
-            The first is the order list.
-            If IncludeOption.item is set, the same result of get_item method will be returned as the 2nd and 3rd return value.
-    """
-    res = requests.get(
-        API_BASE_URL + f"/items/{url_name}/orders",
-        params={"include": include},
-        headers={"Platform": platform},
+def get_orders(*args, **kwargs):
+    """The same as `orders.get_orders`"""
+    warn(
+        "`get_orders` is moved to package `orders` in v1.1. This function would be deprecated in the future."
     )
-    check_wm_response(res)
-    json_obj = res.json()
-    orders = list(map(lambda x: OrderRow.from_dict(x), json_obj["payload"]["orders"]))
-    if include == IncludeOption.item:
-        target_item, items_in_set = _transform_item_result(json_obj["include"]["item"])
-        return orders, target_item, items_in_set
-    else:
-        return orders
+    from ..orders.api import get_orders
+
+    return get_orders(*args, **kwargs)
 
 
 def _transform_item_result(item_json) -> Tuple[ItemFull, List[ItemFull]]:

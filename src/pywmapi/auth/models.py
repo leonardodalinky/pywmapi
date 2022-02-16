@@ -17,6 +17,7 @@ __all__ = [
 @dataclass
 class Session:
     jwt: str
+    csrf_token: str
     user: "User"
 
 
@@ -68,7 +69,6 @@ class User(ModelBase):
     verification: bool
     check_code: str
     ingame_name: str
-    check_code: str
     patreon_profile: Optional[PatreonProfile]
     platform: Platform
     region: str

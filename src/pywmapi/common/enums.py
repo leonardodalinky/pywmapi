@@ -53,3 +53,9 @@ class ElementType(str, Enum):
     toxin = "toxin"
     magnetic = "magnetic"
     radiation = "radiation"
+
+
+class ProfileStatus(str, Enum):
+    offline = "offline"
+    online = "online"
+    ingame = "ingame"

@@ -62,12 +62,12 @@ def signin(
             "device_id": device_id,
             "auth_type": auth_type,
         },
-        headers={"x-csrftoken": csrf_token},
+        headers={"X-CSRFToken": csrf_token},
         cookies={"JWT": jwt},
     )
     check_wm_response(res)
     user = User.from_dict(res.json()["payload"]["user"])
-    return Session(jwt, user)
+    return Session(res.cookies["JWT"], csrf_token, user)
 
 
 def restore(email: str) -> None:

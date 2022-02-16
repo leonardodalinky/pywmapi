@@ -1,1 +1,11 @@
-from . import auth, common, items, lang, liches, rivens, statistics
+from . import (
+    auth,
+    common,
+    items,
+    lang,
+    liches,
+    orders,
+    profile,
+    rivens,
+    statistics,
+)
