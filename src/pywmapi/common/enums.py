@@ -43,3 +43,13 @@ class WeaponType(str, Enum):
 class IconFormat(str, Enum):
     land = "land"
     port = "port"
+
+
+class ElementType(str, Enum):
+    impact = "impact"
+    heat = "heat"
+    cold = "cold"
+    electricity = "electricity"
+    toxin = "toxin"
+    magnetic = "magnetic"
+    radiation = "radiation"

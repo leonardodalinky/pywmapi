@@ -15,7 +15,6 @@ __all__ = [
 
 @dataclass
 class RivenItem(ModelBase):
-    @dataclass
     class Group(str, Enum):
         primary = "primary"
         secondary = "secondary"
@@ -37,13 +36,11 @@ class RivenItem(ModelBase):
 
 @dataclass
 class RivenAttribute(ModelBase):
-    @dataclass
     class Group(str, Enum):
         default = "default"
         melee = "melee"
         top = "top"
 
-    @dataclass
     class Units(str, Enum):
         percent = "percent"
         seconds = "seconds"

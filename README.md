@@ -16,31 +16,35 @@
 For now, the implemented function is listed below:
 
 * auth
-  * [x] sign in
-  * [ ] register
-  * [ ] restore password
+  * ✅ sign in
+  * 🆖 register
+  * 🆖 restore password
 * items
-  * [x] list all tradable items
-  * [x] get info about an item
-  * [x] get list of orders of an item
+  * ✅ list all tradable items
+  * ✅ get info about an item
+  * ✅ get list of orders of an item
 * statistics
-  * [x] get statistics of an item
+  * ✅ get statistics of an item
 * profile
-  * [ ] create an order
+  * 🔲 create an order
 * liches
-  * [ ] list all lich weapons
-  * [ ] list all lich ephemeras
-  * [ ] list all lich quirks
+  * ✅ list all lich weapons
+  * ✅ list all lich ephemeras
+  * ✅ list all lich quirks
 * rivens
-  * [x] list all riven items
-  * [x] get a list of riven attributes
+  * ✅ list all riven items
+  * ✅ get a list of riven attributes
 * auctions
-  * [ ] create auction
-  * [ ] get a list of riven auctions by given search params
-  * [ ] get a list of lich auctions by given search params
+  * 🔲 create auction
+  * 🔲 get a list of riven auctions by given search params
+  * 🔲 get a list of lich auctions by given search params
 * auction entry
-  * [ ] get info about auction by auction id
-  * [ ] get auction bids by auction id
+  * 🔲 get info about auction by auction id
+  * 🔲 get auction bids by auction id
+
+"✅" means implemented. "🆖" means unreachable due to some intractable problem. "🔲" means not being implemented yet.
+
+There're more APIs that are not recorded in the official documentation. Once all the above APIs are done, we would get on these undocumented APIs ASAP.
 
 ## Installation
 

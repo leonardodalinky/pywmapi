@@ -11,6 +11,7 @@ __all__ = [
     "get_csrf_and_jwt",
     "SigninAuthtype",
     "signin",
+    # "restore",
 ]
 
 
@@ -66,3 +67,22 @@ def signin(
     res.raise_for_status()
     user = User.from_dict(res.json()["payload"]["user"])
     return Session(jwt, user)
+
+
+def restore(email: str) -> None:
+    """Recieve mail with the new password, short after api call
+
+    Args:
+        email (str): email address
+    """
+    raise NotImplementedError("ReCaptcha didn't work for now.")
+    csrf_token, jwt = get_csrf_and_jwt()
+    res = requests.post(
+        API_BASE_URL + "/auth/restore",
+        json={
+            "email": email,
+        },
+        headers={"x-csrftoken": csrf_token},
+        cookies={"JWT": jwt},
+    )
+    res.raise_for_status()
