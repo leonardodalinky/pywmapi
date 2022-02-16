@@ -133,8 +133,14 @@ Some of these function may have various optional params, such as `platform`, `la
 ## Reference
 
 [Warframe market official API documentation](https://warframe.market/api_docs)
+
 [WFCD/market-api-spec](https://github.com/WFCD/market-api-spec)
+
 [Public WM API](https://docs.google.com/document/d/1121cjBNN4BeZdMBGil6Qbuqse-sWpEXPpitQH5fb_Fo)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 Feel free to make any issue or PR! 😊
