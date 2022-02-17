@@ -1,10 +1,16 @@
+from ast import Call
 from dataclasses import dataclass
+import dataclasses
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Callable, TypeVar
+from queue import Queue
+from threading import Thread
+from websocket import WebSocketApp, ABNF
+from functools import partial
+import json
 
 from dacite import Config
-
 from ..common import *
 
 __all__ = [
@@ -14,11 +20,57 @@ __all__ = [
 ]
 
 
-@dataclass
+T = TypeVar("T")
+
+
 class Session:
-    jwt: str
-    csrf_token: str
-    user: "User"
+    def __init__(self, jwt: str, csrf_token: str, user: "User", ws_platform: Platform, on_message: Optional[MessageCallback]) -> None:
+        self.jwt = jwt
+        self.csrf_token = csrf_token
+        self.user = user
+        self.ws_platform = ws_platform
+        self.recv_messages = Queue()
+        self._is_ws_open = False
+        self._wsapp: Optional[WebSocketApp] = None
+
+        def _ws_on_open(wsapp: WebSocketApp):
+            self._is_ws_open = True
+
+        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None):
+            out_queue.put(message)
+            if on_message is not None:
+                on_message(message)
+
+        def _wsapp_func():
+            self._wsapp = WebSocketApp(
+                WSS_BASE_URL + f"?platform={ws_platform}",
+                cookie=f"JWT={jwt}",
+                on_open=_ws_on_open,
+                on_message=partial(_ws_on_message, out_queue=self.recv_messages),
+            )
+            self._wsapp.run_forever()
+
+        self._wsapp_thread = Thread(target=_wsapp_func)
+        self._wsapp_thread.setDaemon(True)
+        self._wsapp_thread.start()
+
+    def send_str(self, data: str, opcode: int = ABNF.OPCODE_TEXT) -> None:
+        """Send raw string data through ws connection
+
+        Args:
+            data (str): raw string data
+            opcode (int, optional): ws opcode. Defaults to ABNF.OPCODE_TEXT.
+        """
+        while not self._is_ws_open:
+            continue
+        self._wsapp.send(data, opcode=opcode)
+
+    def send_msg(self, msg_data: WSMessage[T], opcode: int = ABNF.OPCODE_TEXT) -> None:
+        data = json.dumps(dataclasses.asdict(msg_data))
+        self.send_str(data, opcode=opcode)
+
+    def __del__(self):
+        self._wsapp.close()
 
 
 @dataclass

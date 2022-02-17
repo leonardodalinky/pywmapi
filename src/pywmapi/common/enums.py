@@ -59,3 +59,7 @@ class ProfileStatus(str, Enum):
     offline = "offline"
     online = "online"
     ingame = "ingame"
+
+
+class WSType(str, Enum):
+    SET_STATUS = "@WS/USER/SET_STATUS"

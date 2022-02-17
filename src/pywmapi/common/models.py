@@ -1,10 +1,18 @@
+from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, Type, TypeVar
+from typing import Any, Dict, Optional, Type, TypeVar, Generic
 
 from dacite import Config, from_dict
+from .enums import WSType
 
 T = TypeVar("T")
+
+
+__all__ = [
+    "ModelBase",
+    "WSMessage",
+]
 
 
 class ModelBase:
@@ -20,3 +28,14 @@ class ModelBase:
         if datetime not in config.type_hooks.keys():
             config.type_hooks[datetime] = datetime.fromisoformat
         return from_dict(data_class=cls, data=d, config=config)
+
+
+@dataclass(init=False)
+class WSMessage(Generic[T]):
+    type: WSType
+    payload: T
+
+    def __init__(self, type: WSType, payload: Type[T]) -> None:
+        super().__init__()
+        self.type = type
+        self.payload: Type[T] = payload

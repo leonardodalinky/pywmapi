@@ -9,7 +9,7 @@
 
 **PY**thon **W**arframe **M**arket **API**(pywmapi)
 
-🔥 API for warframe market, written in Python.
+🔥 API for warframe market, implemented in Python.
 
 > *"Thank you tinsuit, a fine trade. Transaction complete, haha!" -- Maroo*
 
@@ -25,6 +25,7 @@ For now, the implemented function is listed below:
   * ✅ get a user's profile
   * 🔲 get all of a user's achievements
   * 🔲 get all of a user's reviews
+  * ✅ set current user's online/offline status
 * items
   * ✅ list all tradable items
   * ✅ get info about an item

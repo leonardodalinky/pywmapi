@@ -30,6 +30,14 @@ def list_items(lang: Optional[Language] = Language.en) -> List[RivenItem]:
 
 
 def list_attrs(lang: Optional[Language] = Language.en) -> List[RivenAttribute]:
+    """List all riven attributes
+
+    Args:
+        lang (Optional[Language], optional): addition language support. Defaults to Language.en.
+
+    Returns:
+        List[RivenAttribute]: attributes
+    """
     res = requests.get(
         API_BASE_URL + "/riven/attributes",
         headers={"Language": lang},

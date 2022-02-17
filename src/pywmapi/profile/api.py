@@ -10,6 +10,7 @@ from .models import *
 __all__ = [
     "get_current_user",
     "get_profile_by_username",
+    "set_profile_status",
 ]
 
 
@@ -45,3 +46,8 @@ def get_profile_by_username(username: str) -> Profile:
     )
     check_wm_response(res)
     return Profile.from_dict(res.json()["payload"]["profile"])
+
+
+def set_profile_status(sess: Session, status: ProfileStatus):
+    # TODO
+    sess.send_msg(WSMessage[str](WSType.SET_STATUS, status))
