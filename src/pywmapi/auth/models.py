@@ -1,17 +1,18 @@
-from ast import Call
-from dataclasses import dataclass
 import dataclasses
+import json
+from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, Callable, TypeVar
+from functools import partial
 from queue import Queue
 from threading import Thread
-from websocket import WebSocketApp, ABNF
-from functools import partial
-import json
+from typing import Dict, Optional, TypeVar
 
 from dacite import Config
+from websocket import ABNF, WebSocketApp
+
 from ..common import *
+from ..exceptions import *
 
 __all__ = [
     "Session",
@@ -24,7 +25,14 @@ T = TypeVar("T")
 
 
 class Session:
-    def __init__(self, jwt: str, csrf_token: str, user: "User", ws_platform: Platform, on_message: Optional[MessageCallback]) -> None:
+    def __init__(
+        self,
+        jwt: str,
+        csrf_token: str,
+        user: "User",
+        ws_platform: Platform,
+        on_message: Optional[MessageCallback],
+    ) -> None:
         self.jwt = jwt
         self.csrf_token = csrf_token
         self.user = user
@@ -63,7 +71,10 @@ class Session:
         """
         while not self._is_ws_open:
             continue
-        self._wsapp.send(data, opcode=opcode)
+        try:
+            self._wsapp.send(data, opcode=opcode)
+        except Exception as e:
+            raise WMError(-1, "Websocket failed. Try to dive into the `raw_error`.", e)
 
     def send_msg(self, msg_data: WSMessage[T], opcode: int = ABNF.OPCODE_TEXT) -> None:
         data = json.dumps(dataclasses.asdict(msg_data))

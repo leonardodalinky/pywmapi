@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, Type, TypeVar, Generic
+from typing import Any, Dict, Generic, Optional, Type, TypeVar
 
 from dacite import Config, from_dict
+
 from .enums import WSType
 
 T = TypeVar("T")

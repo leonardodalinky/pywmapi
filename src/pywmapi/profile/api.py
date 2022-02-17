@@ -48,6 +48,11 @@ def get_profile_by_username(username: str) -> Profile:
     return Profile.from_dict(res.json()["payload"]["profile"])
 
 
-def set_profile_status(sess: Session, status: ProfileStatus):
-    # TODO
+def set_profile_status(sess: Session, status: ProfileStatus) -> None:
+    """Switch the profile status
+
+    Args:
+        sess (Session): session
+        status (ProfileStatus): online/offline/ingame
+    """
     sess.send_msg(WSMessage[str](WSType.SET_STATUS, status))
