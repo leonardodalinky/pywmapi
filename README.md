@@ -9,38 +9,57 @@
 
 **PY**thon **W**arframe **M**arket **API**(pywmapi)
 
-🔥 API for warframe market, written in Python.
+🔥 API for warframe market, implemented in Python.
 
 > *"Thank you tinsuit, a fine trade. Transaction complete, haha!" -- Maroo*
 
 For now, the implemented function is listed below:
 
 * auth
-  * [x] sign in
-  * [ ] register
-  * [ ] restore password
-* items
-  * [x] list all tradable items
-  * [x] get info about an item
-  * [x] get list of orders of an item
-* statistics
-  * [x] get statistics of an item
+  * ✅ sign in
+  * 🆖 register
+  * 🆖 restore password
 * profile
-  * [ ] create an order
+  * ✅ get current user's profile
+  * 🔲 manage current user profile
+  * ✅ get a user's profile
+  * 🔲 get all of a user's achievements
+  * 🔲 get all of a user's reviews
+  * ✅ set current user's online/offline status
+* items
+  * ✅ list all tradable items
+  * ✅ get info about an item
+* statistics
+  * ✅ get statistics of an item
+  * 🔲 get global market statistics
+* orders
+  * ✅ get orders of a single item
+  * 🔲 get orders for the last 4 hours
+  * 🔲 get individual order from current profile
+  * 🔲 update a single order on the current profile
+  * 🔲 delete a single order on the current profile
+  * 🔲 add a new order for the current profile
+  * 🔲 get all of the current profile's orders
+  * 🔲 get user's sale statistics(closed orders)
+  * 🔲 get all of a user's orders
 * liches
-  * [ ] list all lich weapons
-  * [ ] list all lich ephemeras
-  * [ ] list all lich quirks
+  * ✅ list all lich weapons
+  * ✅ list all lich ephemeras
+  * ✅ list all lich quirks
 * rivens
-  * [ ] list all riven items
-  * [ ] get a list of riven attributes
+  * ✅ list all riven items
+  * ✅ get a list of riven attributes
 * auctions
-  * [ ] create auction
-  * [ ] get a list of riven auctions by given search params
-  * [ ] get a list of lich auctions by given search params
+  * 🔲 create auction
+  * 🔲 get a list of riven auctions by given search params
+  * 🔲 get a list of lich auctions by given search params
 * auction entry
-  * [ ] get info about auction by auction id
-  * [ ] get auction bids by auction id
+  * 🔲 get info about auction by auction id
+  * 🔲 get auction bids by auction id
+
+"✅" means implemented. "🆖" means unreachable due to some intractable problem. "🔲" means not being implemented yet.
+
+There're more APIs that are not recorded in the official documentation. Once all the above APIs are done, we would get on these undocumented APIs ASAP.
 
 ## Installation
 
@@ -57,16 +76,23 @@ package of pywmapi is structured as:
 .
 ├── auth
 ├── common
+├── exceptions
 ├── items
 ├── lang
+├── liches
+├── orders
+├── profile
+├── rivens
 └── statistics
 ```
 
-For authentication, look up the `auth` package.
-
-For items maniplation, look up the `items` package.
-
-For getting statistics of items, look up the `statistics` package.
+* `auth`: authentication such as signin
+* `items`: item related
+* `liches` lich related
+* `orders`: orders maniplation
+* `profile`: user profile maniplation
+* `rivens`: riven related
+* `statistics`: statistics of items
 
 💪 *More functionalities is coming!*
 
@@ -104,6 +130,18 @@ wm.statistics.get_statistic("chroma_prime_systems")
 ```
 
 Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.
+
+## Reference
+
+[Warframe market official API documentation](https://warframe.market/api_docs)
+
+[WFCD/market-api-spec](https://github.com/WFCD/market-api-spec)
+
+[Public WM API](https://docs.google.com/document/d/1121cjBNN4BeZdMBGil6Qbuqse-sWpEXPpitQH5fb_Fo)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 Feel free to make any issue or PR! 😊

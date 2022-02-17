@@ -8,8 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-* Add api for `liches` and `rivens`(TODO).
+* Add api for `orders`, `profile`, `liches` and `rivens`.
+* Add `exceptions` wrapper.
+* Add websocket support to `Session`.
 * Add shpinx documentation page(TODO).
+
+### Changed
+
+* Move `get_orders()` from `items` to `orders`, along with the related model definitions.
+
+### Deprecated
+
+* `items.get_orders()` would be deprecated.
 
 ## [1.0.0] - 2022-02-08
 

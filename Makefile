@@ -7,10 +7,11 @@ TEST_DIR := ${PROJECT_DIR}/test
 PIPREQS := pipreqs
 BLACK := black
 FLAKE8 := flake8
+ISORT := isort
 
 ifeq ($(OS),Windows_NT)
 	RMDIR := rmdir /S /Q
-	PYTHONPATHSET := set PYTHONPATH=${SRC_DIR}:%PYTHONPATH% &&
+	PYTHONPATHSET := set PYTHONPATH=${SRC_DIR};%PYTHONPATH% &&
 else
 	RMDIR := rm -rf
 	PYTHONPATHSET := PYTHONPATH="${SRC_DIR}:${PYTHONPATH}"
@@ -27,6 +28,7 @@ help:
 	@echo "* testpypi: upload to testpypi"
 	@echo "* pypi: upload to pypi"
 	@echo "* black: format the code by black"
+	@echo "* isort: sort the imports"
 	@echo "* uninstall: uninstall the pywmapi package"
 	@echo "* clean: clean all the build & dist cache"
 	@echo ""
@@ -61,6 +63,10 @@ flake8:
 .PHONY: black
 black:
 	${PYTHON} -m ${BLACK} -l 100 -t py37 src test
+
+.PHONY: isort
+isort:
+	${PYTHON} -m ${ISORT} --profile black -m 3 -l 80 ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: uninstall
 uninstall:

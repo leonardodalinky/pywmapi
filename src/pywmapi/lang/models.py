@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
+
 from dacite import Config
 
 from ..common import *
-
 
 __all__ = [
     "LangInItem",

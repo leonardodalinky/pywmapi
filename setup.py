@@ -30,6 +30,7 @@ setuptools.setup(
         "beautifulsoup4>=4",
         "dacite>=1.6",
         "requests>=2",
+        "websocket-client>=1.2",
     ],
     keywords="warframe market api",
     package_dir={"": "src"},

@@ -1,14 +1,14 @@
 from enum import Enum
 
 
-class Platform(Enum):
+class Platform(str, Enum):
     pc = "pc"
     xbox = "xbox"
     ps4 = "ps4"
     switch = "switch"
 
 
-class Language(Enum):
+class Language(str, Enum):
     en = "en"
     ru = "ru"
     ko = "ko"
@@ -22,10 +22,44 @@ class Language(Enum):
     pl = "pl"
 
 
-class OrderType(Enum):
+class OrderType(str, Enum):
     sell = "sell"
     buy = "buy"
 
 
-class IncludeOption(Enum):
+class IncludeOption(str, Enum):
     item = "item"
+
+
+class WeaponType(str, Enum):
+    shotgun = "shotgun"
+    rifle = "rifle"
+    pistol = "pistol"
+    melee = "melee"
+    zaw = "zaw"
+    kitgun = "kitgun"
+
+
+class IconFormat(str, Enum):
+    land = "land"
+    port = "port"
+
+
+class ElementType(str, Enum):
+    impact = "impact"
+    heat = "heat"
+    cold = "cold"
+    electricity = "electricity"
+    toxin = "toxin"
+    magnetic = "magnetic"
+    radiation = "radiation"
+
+
+class ProfileStatus(str, Enum):
+    offline = "offline"
+    online = "online"
+    ingame = "ingame"
+
+
+class WSType(str, Enum):
+    SET_STATUS = "@WS/USER/SET_STATUS"

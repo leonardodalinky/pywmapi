@@ -1,16 +1,18 @@
-import requests
-from typing import Optional, Tuple
 from enum import Enum
+from typing import Optional, Tuple
+
+import requests
 from bs4 import BeautifulSoup
 
 from ..common import *
+from ..exceptions import *
 from .models import *
-
 
 __all__ = [
     "get_csrf_and_jwt",
     "SigninAuthtype",
     "signin",
+    # "restore",
 ]
 
 
@@ -29,7 +31,7 @@ def get_csrf_and_jwt() -> Tuple[str, str]:
     return csrf_token, jwt
 
 
-class SigninAuthtype(Enum):
+class SigninAuthtype(str, Enum):
     cookie = "cookie"
     header = "header"
 
@@ -39,6 +41,8 @@ def signin(
     password: str,
     device_id: Optional[str] = None,
     auth_type: Optional[SigninAuthtype] = SigninAuthtype.cookie,
+    ws_platform: Platform = Platform.pc,
+    ws_on_message: Optional[MessageCallback] = None,
 ) -> Session:
     """Login to the account
 
@@ -58,11 +62,30 @@ def signin(
             "email": email,
             "password": password,
             "device_id": device_id,
-            "auth_type": auth_type.value if auth_type is not None else None,
+            "auth_type": auth_type,
+        },
+        headers={"X-CSRFToken": csrf_token},
+        cookies={"JWT": jwt},
+    )
+    check_wm_response(res)
+    user = User.from_dict(res.json()["payload"]["user"])
+    return Session(res.cookies["JWT"], csrf_token, user, ws_platform, on_message=ws_on_message)
+
+
+def restore(email: str) -> None:
+    """(CAUTION)Recieve mail with the new password, short after api call
+
+    Args:
+        email (str): email address
+    """
+    raise NotImplementedError("ReCaptcha didn't work for now.")
+    csrf_token, jwt = get_csrf_and_jwt()
+    res = requests.post(
+        API_BASE_URL + "/auth/restore",
+        json={
+            "email": email,
         },
         headers={"x-csrftoken": csrf_token},
         cookies={"JWT": jwt},
     )
-    res.raise_for_status()
-    user = User.from_dict(res.json()["payload"]["user"])
-    return Session(jwt, user)
+    check_wm_response(res)

@@ -1,9 +1,10 @@
-import requests
 from typing import Dict, List, Optional, Tuple
 
-from ..common import *
-from .models import *
+import requests
 
+from ..common import *
+from ..exceptions import *
+from .models import *
 
 __all__ = [
     "get_statistic",
@@ -22,9 +23,9 @@ def get_statistic(url_name: str, platform: Optional[Platform] = Platform.pc) -> 
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/statistics",
-        headers={"Platform": platform.value if platform is not None else None},
+        headers={"Platform": platform},
     )
-    res.raise_for_status()
+    check_wm_response(res)
     payload = res.json()["payload"]
     return Statistic(
         closed_48h=list(

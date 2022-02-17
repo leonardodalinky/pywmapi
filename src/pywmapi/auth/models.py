@@ -1,11 +1,18 @@
+import dataclasses
+import json
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Dict, Any, Optional
+from functools import partial
+from queue import Queue
+from threading import Thread
+from typing import Dict, Optional, TypeVar
+
 from dacite import Config
+from websocket import ABNF, WebSocketApp
 
 from ..common import *
-
+from ..exceptions import *
 
 __all__ = [
     "Session",
@@ -14,15 +21,72 @@ __all__ = [
 ]
 
 
-@dataclass
+T = TypeVar("T")
+
+
 class Session:
-    jwt: str
-    user: "User"
+    def __init__(
+        self,
+        jwt: str,
+        csrf_token: str,
+        user: "User",
+        ws_platform: Platform,
+        on_message: Optional[MessageCallback],
+    ) -> None:
+        self.jwt = jwt
+        self.csrf_token = csrf_token
+        self.user = user
+        self.ws_platform = ws_platform
+        self.recv_messages = Queue()
+        self._is_ws_open = False
+        self._wsapp: Optional[WebSocketApp] = None
+
+        def _ws_on_open(wsapp: WebSocketApp):
+            self._is_ws_open = True
+
+        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None):
+            out_queue.put(message)
+            if on_message is not None:
+                on_message(message)
+
+        def _wsapp_func():
+            self._wsapp = WebSocketApp(
+                WSS_BASE_URL + f"?platform={ws_platform}",
+                cookie=f"JWT={jwt}",
+                on_open=_ws_on_open,
+                on_message=partial(_ws_on_message, out_queue=self.recv_messages),
+            )
+            self._wsapp.run_forever()
+
+        self._wsapp_thread = Thread(target=_wsapp_func)
+        self._wsapp_thread.setDaemon(True)
+        self._wsapp_thread.start()
+
+    def send_str(self, data: str, opcode: int = ABNF.OPCODE_TEXT) -> None:
+        """Send raw string data through ws connection
+
+        Args:
+            data (str): raw string data
+            opcode (int, optional): ws opcode. Defaults to ABNF.OPCODE_TEXT.
+        """
+        while not self._is_ws_open:
+            continue
+        try:
+            self._wsapp.send(data, opcode=opcode)
+        except Exception as e:
+            raise WMError(-1, "Websocket failed. Try to dive into the `raw_error`.", e)
+
+    def send_msg(self, msg_data: WSMessage[T], opcode: int = ABNF.OPCODE_TEXT) -> None:
+        data = json.dumps(dataclasses.asdict(msg_data))
+        self.send_str(data, opcode=opcode)
+
+    def __del__(self):
+        self._wsapp.close()
 
 
 @dataclass
 class UserShort:
-    class Status(Enum):
+    class Status(str, Enum):
         ingame = "ingame"
         online = "online"
         offline = "offline"
@@ -38,13 +102,13 @@ class UserShort:
 
 @dataclass
 class User(ModelBase):
-    class Role(Enum):
+    class Role(str, Enum):
         anonymous = "anonymous"
         user = "user"
         moderator = "moderator"
         admin = "admin"
 
-    class PatreonBadge(Enum):
+    class PatreonBadge(str, Enum):
         bronze = "bronze"
         gold = "gold"
         silver = "silver"
@@ -68,7 +132,6 @@ class User(ModelBase):
     verification: bool
     check_code: str
     ingame_name: str
-    check_code: str
     patreon_profile: Optional[PatreonProfile]
     platform: Platform
     region: str
