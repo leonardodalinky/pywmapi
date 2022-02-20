@@ -132,3 +132,6 @@ tmp*.py
 
 # vscode
 .vscode/
+
+# pycharm
+.idea/
