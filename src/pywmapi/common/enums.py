@@ -63,3 +63,21 @@ class ProfileStatus(str, Enum):
 
 class WSType(str, Enum):
     SET_STATUS = "@WS/USER/SET_STATUS"
+
+
+class AuctionItemType(str, Enum):
+    riven = "riven"
+    lich = "lich"
+    kubrow = "kubrow"
+
+
+class Polarity(str, Enum):
+    madurai = "madurai"
+    vazarin = "vazarin"
+    naramon = "naramon"
+    zenurik = "zenurik"
+    unairu = "unairu"
+    penjaga = "penjaga"
+    umbra = "umbra"
+    aura = "aura"
+
