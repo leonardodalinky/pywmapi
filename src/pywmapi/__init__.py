@@ -1,6 +1,8 @@
 from . import (
     auth,
     common,
+    exceptions,
+    experimental,
     items,
     lang,
     liches,
@@ -9,3 +11,5 @@ from . import (
     rivens,
     statistics,
 )
+
+__VERSION__ = "1.1.0"

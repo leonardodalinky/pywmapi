@@ -49,8 +49,8 @@ For now, the implemented function is listed below:
 * rivens
   * ✅ list all riven items
   * ✅ get a list of riven attributes
-* auctions
-  * 🔲 create auction
+* auctions(*experimental*)
+  * ✅ create auction
   * 🔲 get a list of riven auctions by given search params
   * 🔲 get a list of lich auctions by given search params
 * auction entry
@@ -77,6 +77,8 @@ package of pywmapi is structured as:
 ├── auth
 ├── common
 ├── exceptions
+├── experimental
+│   └── auctions
 ├── items
 ├── lang
 ├── liches
@@ -87,6 +89,8 @@ package of pywmapi is structured as:
 ```
 
 * `auth`: authentication such as signin
+* `experimental`: experimental functionalities
+  * `auctions`: auctions related
 * `items`: item related
 * `liches` lich related
 * `orders`: orders maniplation

@@ -8,6 +8,7 @@ from dacite import Config
 from ..common import *
 
 __all__ = [
+    "ProfileStatus",
     "Profile",
 ]
 

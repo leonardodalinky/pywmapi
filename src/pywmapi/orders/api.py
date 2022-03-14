@@ -25,13 +25,14 @@ def get_orders(
         platform (Optional[Platform], optional): platform. Defaults to Platform.pc.
         include (Optional[IncludeOption], optional):
             additional info.
-            If IncludeOption.item is set, the info of the item will be returned additionaly.
+            If ``IncludeOption.item`` is set, the info of the item will be returned additionally.
             Defaults to None.
 
     Returns:
         Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
             The first is the order list.
-            If IncludeOption.item is set, the same result of get_item method will be returned as the 2nd and 3rd return value.
+            If ``IncludeOption.item`` is set, the same result of get_item method will be returned
+            as the 2nd and 3rd return value.
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/orders",

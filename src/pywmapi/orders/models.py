@@ -9,6 +9,7 @@ from ..auth.models import UserShort
 from ..common import *
 
 __all__ = [
+    "OrderType",
     "OrderCommon",
     "OrderRow",
     # "OrderFull",
