@@ -15,7 +15,7 @@ class WMError(Exception):
         self.raw_error = raw_error
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__}: {self.status_code} {self.error_msg}"
+        return f"{self.status_code} {self.error_msg}"
 
     def __repr__(self) -> str:
         return self.__str__()

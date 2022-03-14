@@ -65,7 +65,7 @@ class WSType(str, Enum):
     SET_STATUS = "@WS/USER/SET_STATUS"
 
 
-class AuctionItemType(str, Enum):
+class AuctionType(str, Enum):
     riven = "riven"
     lich = "lich"
     kubrow = "kubrow"
@@ -80,4 +80,3 @@ class Polarity(str, Enum):
     penjaga = "penjaga"
     umbra = "umbra"
     aura = "aura"
-
