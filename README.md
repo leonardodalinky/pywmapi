@@ -39,9 +39,8 @@ For now, the implemented function is listed below:
   * 🔲 update a single order on the current profile
   * 🔲 delete a single order on the current profile
   * 🔲 add a new order for the current profile
-  * 🔲 get all of the current profile's orders
   * 🔲 get user's sale statistics(closed orders)
-  * 🔲 get all of a user's orders
+  * ✅ get all of a user's orders
 * liches
   * ✅ list all lich weapons
   * ✅ list all lich ephemeras
@@ -49,17 +48,23 @@ For now, the implemented function is listed below:
 * rivens
   * ✅ list all riven items
   * ✅ get a list of riven attributes
-* auctions(*experimental*)
-  * ✅ create auction
+* auctions
+  * ✅ create auction ⚠️
   * 🔲 get a list of riven auctions by given search params
   * 🔲 get a list of lich auctions by given search params
-* auction entry
+* auction entry️
   * 🔲 get info about auction by auction id
   * 🔲 get auction bids by auction id
 
-"✅" means implemented. "🆖" means unreachable due to some intractable problem. "🔲" means not being implemented yet.
+Symbols:
+* ✅: implemented
+* 🆖: unavailable due to some intractable problem
+* 🔲: not implemented yet
+* ⚠️: *experimental* and unstable
 
-There're more APIs that are not recorded in the official documentation. Once all the above APIs are done, we would get on these undocumented APIs ASAP.
+There are more APIs that are not recorded in the official documentation. Once all the above APIs are done, we would get on these undocumented APIs ASAP.
+
+**According to the official API documentation, there's a limit on the API that could only be called 3 times per sec. Otherwise, the request may be blocked by the cloudflare.**
 
 ## Installation
 
@@ -93,8 +98,8 @@ package of pywmapi is structured as:
   * `auctions`: auctions related
 * `items`: item related
 * `liches` lich related
-* `orders`: orders maniplation
-* `profile`: user profile maniplation
+* `orders`: orders manipulation
+* `profile`: user profile manipulation
 * `rivens`: riven related
 * `statistics`: statistics of items
 
@@ -133,6 +138,12 @@ To get the statistics of historical prices of any item:
 wm.statistics.get_statistic("chroma_prime_systems")
 ```
 
+Signin & get current orders:
+```python
+sess = wm.auth.signin("your_account", "your_password")
+sell_orders, buy_orders = wm.orders.get_current_orders(sess)
+```
+
 Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.
 
 ## Reference
@@ -154,7 +165,7 @@ Feel free to make any issue or PR! 😊
 
 ## Donating
 
-Any sort of donation in game would be appretiated.
+Any sort of donation in game would be appreciated.
 
 Contact me in game:
 ```

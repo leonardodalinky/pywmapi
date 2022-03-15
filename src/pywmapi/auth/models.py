@@ -83,6 +83,17 @@ class Session:
     def __del__(self):
         self._wsapp.close()
 
+    def to_header_dict(self) -> Dict[str, Dict[str, str]]:
+        """get the key/value dict for request header
+
+        Returns:
+            Dict[str, Dict[str, str]]:
+        """
+        return {
+            "headers": {"X-CSRFToken": self.csrf_token},
+            "cookies": {"JWT": self.jwt},
+        }
+
 
 @dataclass
 class UserShort:

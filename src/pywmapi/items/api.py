@@ -62,20 +62,11 @@ def get_orders(*args, **kwargs):
 
 
 def _transform_item_result(item_json) -> Tuple[ItemFull, List[ItemFull]]:
-    # transform `zh-han*` to `zh_han*`
-    for d in item_json["items_in_set"]:
-        d: Dict
-        for k in list(d.keys()):
-            k: str
-            if "-" in k:
-                d[k.replace("-", "_")] = d[k]
-
-    id = item_json["id"]
     items_in_set = list(map(lambda x: ItemFull.from_dict(x), item_json["items_in_set"]))
 
     target_item = None
     for item in items_in_set:
-        if item.id == id:
+        if item.id == item_json["id"]:
             target_item = item
             break
     if target_item is None:

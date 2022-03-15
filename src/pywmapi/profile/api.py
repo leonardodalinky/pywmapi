@@ -25,8 +25,7 @@ def get_current_user(sess: Session) -> User:
     """
     res = requests.get(
         API_BASE_URL + f"/profile",
-        headers={"X-CSRFToken": sess.csrf_token},
-        cookies={"JWT": sess.jwt},
+        **sess.to_header_dict(),
     )
     check_wm_response(res)
     return User.from_dict(res.json()["profile"])

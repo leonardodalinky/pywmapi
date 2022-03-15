@@ -1,7 +1,7 @@
+from dataclasses import asdict
 from typing import List, Optional, Union
 
 import requests
-from dataclasses import asdict
 
 from ...auth.models import Session
 from ...common import *
@@ -23,7 +23,22 @@ def create_auction(
     minimal_reputation: int = 0,
     minimal_increment: int = 1,
     private: bool = False,
-):
+) -> AuctionEntry:
+    """Create an auction
+
+    Args:
+        sess (Session): session
+        item (Union[RivenAuction, LichAuction, KubrowAuction]): item of the auction
+        starting_price (int): start price
+        buyout_price (Optional[int]): buyout price. If None, set to infinity.
+        note (str): description
+        minimal_reputation (int): minimal reputation required to buy
+        minimal_increment (int): minimal increment
+        private (bool): private auction
+
+    Returns:
+        AuctionEntry: entry of the created auction
+    """
     res = requests.post(
         API_BASE_URL + "/auctions/create",
         json={
@@ -35,8 +50,7 @@ def create_auction(
             "private": private,
             "item": asdict(item),
         },
-        headers={"X-CSRFToken": sess.csrf_token},
-        cookies={"JWT": sess.jwt},
+        **sess.to_header_dict(),
     )
     check_wm_response(res)
     return AuctionEntry.from_dict(res.json()["payload"]["auctions"])

@@ -16,10 +16,30 @@ __all__ = [
 ]
 
 
+def _transform_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
+    """transform "-" to "_" recursively
+
+    Args:
+        d:
+
+    Returns:
+        Dict[str, Any]: new dict
+    """
+    new_dict = d.copy()
+    for k, v in new_dict.items():
+        if isinstance(v, Dict):
+            new_dict[k] = _transform_underscore(v)
+    for k in list(new_dict.keys()):
+        if "-" in k:
+            new_dict[k.replace("-", "_")] = new_dict[k]
+            del new_dict[k]
+    return new_dict
+
+
 class ModelBase:
     @classmethod
     def from_dict(cls, d: Dict[str, Any]):
-        # MAY be overrided by subclass in need
+        # MAY be overridden by subclass in need
         return cls._from_dict(d)
 
     @classmethod
@@ -28,7 +48,7 @@ class ModelBase:
             config.cast.append(Enum)
         if datetime not in config.type_hooks.keys():
             config.type_hooks[datetime] = datetime.fromisoformat
-        return from_dict(data_class=cls, data=d, config=config)
+        return from_dict(data_class=cls, data=_transform_underscore(d), config=config)
 
 
 @dataclass(init=False)
