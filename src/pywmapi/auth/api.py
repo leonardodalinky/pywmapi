@@ -77,6 +77,9 @@ def restore(email: str) -> None:
 
     Args:
         email (str): email address
+
+    Warnings:
+        This function is unavailable since ReCaptcha is in the way.
     """
     raise NotImplementedError("ReCaptcha didn't work for now.")
     csrf_token, jwt = get_csrf_and_jwt()

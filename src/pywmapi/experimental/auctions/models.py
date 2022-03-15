@@ -4,7 +4,6 @@ from typing import Any, Dict, List, Optional, Union
 
 from ...common import AuctionType, ElementType, ModelBase, Platform, Polarity
 
-
 __all__ = [
     "AttributeInRiven",
     "RivenAuction",
