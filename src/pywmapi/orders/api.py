@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from typing import Dict, List, Optional, Tuple, Union
 
 import requests
@@ -7,12 +8,16 @@ from ..common import *
 from ..exceptions import *
 from ..items.api import _transform_item_result
 from ..items.models import *
+from ..utils import *
 from .models import *
 
 __all__ = [
     "get_orders",
     "get_current_orders",
     "get_orders_by_username",
+    "add_order",
+    "update_order",
+    "delete_order",
 ]
 
 
@@ -95,3 +100,65 @@ def get_orders_by_username(
         list(map(lambda x: OrderItem.from_dict(x), json_obj["payload"]["buy_orders"])),
         list(map(lambda x: OrderItem.from_dict(x), json_obj["payload"]["sell_orders"])),
     )
+
+
+def add_order(sess: Session, new_item: OrderNewItem) -> OrderItem:
+    """Add new order
+
+    Args:
+        sess: session
+        new_item: new item to be created
+
+    Returns:
+        OrderItem: new order
+    """
+    res = requests.post(
+        API_BASE_URL + "/profile/orders",
+        json=asdict(new_item, dict_factory=dataclass_ignore_none_factory),
+        **sess.to_header_dict(),
+    )
+    check_wm_response(res)
+    json_obj = res.json()
+    return OrderItem.from_dict(json_obj["payload"]["order"])
+
+
+def update_order(sess: Session, order_id: str, updated_item: OrderUpdateItem) -> OrderItem:
+    """Update an order
+
+    TODO: includes ``top``
+
+    Args:
+        sess: session
+        order_id: ``id`` of order
+        updated_item: updated item
+
+    Returns:
+        OrderItem: updated order
+    """
+    req_json = {"order_id": order_id}
+    req_json.update(asdict(updated_item, dict_factory=dataclass_ignore_none_factory))
+    res = requests.put(
+        API_BASE_URL + f"/profile/orders/{order_id}",
+        json=req_json,
+        **sess.to_header_dict(),
+    )
+    check_wm_response(res)
+    json_obj = res.json()
+    return OrderItem.from_dict(json_obj["payload"]["order"])
+
+
+def delete_order(sess: Session, order_id: str) -> None:
+    """Delete an order
+
+    Args:
+        sess: session
+        order_id: ``id`` of order
+
+    Returns:
+        None
+    """
+    res = requests.delete(
+        API_BASE_URL + f"/profile/orders/{order_id}",
+        **sess.to_header_dict(),
+    )
+    check_wm_response(res)
