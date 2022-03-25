@@ -14,6 +14,9 @@ __all__ = [
     "OrderRow",
     "OrderItem",
     # "OrderFull",
+    "OrderNewItemBase",
+    "OrderNewItem",
+    "OrderUpdateItem",
 ]
 
 
@@ -39,7 +42,7 @@ class OrderRow(OrderCommon):
 @dataclass
 class OrderItem(OrderCommon):
     @dataclass
-    class ItemInOrder:
+    class ItemInOrder(ModelBase):
         @dataclass
         class LangInOrderItem:
             item_name: str
@@ -79,3 +82,30 @@ class OrderFull(OrderRow):
     # TODO
     def __init__(self):
         raise NotImplementedError()
+
+
+@dataclass
+class OrderNewItemBase(ModelBase):
+    platinum: int
+    quantity: int
+    rank: Optional[int]
+    visible: bool
+
+
+@dataclass
+class OrderNewItem(OrderNewItemBase):
+    """
+    Request class for ``orders.add_new_order`` and others.
+    """
+
+    item_id: str
+    order_type: OrderType
+
+
+@dataclass
+class OrderUpdateItem(OrderNewItemBase):
+    """
+    Request class for ``orders.update_order``
+    """
+
+    pass

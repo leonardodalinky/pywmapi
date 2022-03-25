@@ -10,6 +10,7 @@ from .models import *
 __all__ = [
     "list_items",
     "get_item",
+    "get_orders",
 ]
 
 

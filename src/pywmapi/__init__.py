@@ -10,6 +10,7 @@ from . import (
     profile,
     rivens,
     statistics,
+    utils,
 )
 
 __VERSION__ = "1.1.0"
