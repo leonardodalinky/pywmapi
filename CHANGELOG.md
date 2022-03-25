@@ -8,11 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+* Add shpinx documentation page(TODO).
+
+## [1.1.0] - 2022-03-26
+
+### Added
+
 * Add api for `orders`, `profile`, `liches` and `rivens`.
 * Add `experimental` API, including `auctions`.
 * Add `exceptions` wrapper.
 * Add websocket support to `Session`.
-* Add shpinx documentation page(TODO).
 
 ### Changed
 
