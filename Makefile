@@ -28,7 +28,9 @@ help:
 	@echo "* testpypi: upload to testpypi"
 	@echo "* pypi: upload to pypi"
 	@echo "* black: format the code by black"
+	@echo "* black-check: format the code by black, check only"
 	@echo "* isort: sort the imports"
+	@echo "* isort-check: sort the imports, check only"
 	@echo "* uninstall: uninstall the pywmapi package"
 	@echo "* clean: clean all the build & dist cache"
 	@echo ""
@@ -64,9 +66,17 @@ flake8:
 black:
 	${PYTHON} -m ${BLACK} -l 100 -t py37 src test
 
+.PHONY: black-check
+black-check:
+	${PYTHON} -m ${BLACK} -l 100 -t py37 --check src test
+
 .PHONY: isort
 isort:
 	${PYTHON} -m ${ISORT} --profile black -m 3 -l 80 ${PACKAGE_DIR} ${TEST_DIR}
+
+.PHONY: isort-check
+isort-check:
+	${PYTHON} -m ${ISORT} --profile black -m 3 -l 80 --check ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: uninstall
 uninstall:
