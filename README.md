@@ -35,10 +35,9 @@ For now, the implemented function is listed below:
 * orders
   * ✅ get orders of a single item
   * 🔲 get orders for the last 4 hours
-  * 🔲 get individual order from current profile
-  * 🔲 update a single order on the current profile
-  * 🔲 delete a single order on the current profile
-  * 🔲 add a new order for the current profile
+  * ✅ update a single order on the current profile
+  * ✅ delete a single order on the current profile
+  * ✅ add a new order for the current profile
   * 🔲 get user's sale statistics(closed orders)
   * ✅ get all of a user's orders
 * liches
@@ -90,7 +89,8 @@ package of pywmapi is structured as:
 ├── orders
 ├── profile
 ├── rivens
-└── statistics
+├── statistics
+└── utils.py
 ```
 
 * `auth`: authentication such as signin
@@ -133,6 +133,14 @@ To get the orders of a specific item:
 wm.items.get_orders("chroma_prime_systems")
 ```
 
+To create order:
+```python
+sess = wm.auth.signin("your_account", "your_password")
+# new selling order item of "Flame Gland" for 1000 platinum, quantity 1, rank 0 and invisible
+new_item = wm.orders.OrderNewItem("5be5f5a23ffcc7038857f119", wm.common.OrderType.sell, 1000, 1, 1, False)
+new_order = wm.orders.add_order(sess, new_item)
+```
+
 To get the statistics of historical prices of any item:
 ```python
 wm.statistics.get_statistic("chroma_prime_systems")
@@ -145,6 +153,8 @@ sell_orders, buy_orders = wm.orders.get_current_orders(sess)
 ```
 
 Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.
+
+More APIs could be found in corresponding packages.
 
 ## Reference
 

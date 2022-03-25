@@ -15,6 +15,7 @@ __all__ = [
     "get_orders",
     "get_current_orders",
     "get_orders_by_username",
+    # "get_individual_order",
     "add_order",
     "update_order",
     "delete_order",
@@ -58,7 +59,7 @@ def get_orders(
 
 
 def get_current_orders(sess: Session) -> Tuple[List[OrderItem], List[OrderItem]]:
-    """See ``get_orders_by_username``
+    """Get orders of current profile. See ``get_orders_by_username``
 
     Args:
         sess: session
@@ -79,7 +80,7 @@ def get_orders_by_username(
 
     Args:
         username (str): username
-        sess (Session): session. If None, then set in guest mode. Defaults to None.
+        sess (Optional[Session]): session. If None, then set in guest mode. Defaults to None.
 
     Returns:
         Tuple[List[OrderItem], List[OrderItem]]:
@@ -102,12 +103,32 @@ def get_orders_by_username(
     )
 
 
+def get_individual_order(sess: Session, order_id: str) -> OrderItem:
+    """Get individual order by ``order_id``
+
+    Args:
+        sess (Session): session
+        order_id (str): ``id`` of order
+
+    Returns:
+        OrderItem: order
+    """
+    raise NotImplementedError("Seems totally deprecated since response body is empty")
+    # res = requests.get(
+    #     API_BASE_URL + f"/profile/orders/{order_id}",
+    #     **sess.to_header_dict(),
+    # )
+    # check_wm_response(res)
+    # json_obj = res.json()
+    # return OrderItem.from_dict(json_obj["payload"]["order"])
+
+
 def add_order(sess: Session, new_item: OrderNewItem) -> OrderItem:
     """Add new order
 
     Args:
-        sess: session
-        new_item: new item to be created
+        sess (Session): session
+        new_item (OrderNewItem): new item to be created
 
     Returns:
         OrderItem: new order
@@ -128,9 +149,9 @@ def update_order(sess: Session, order_id: str, updated_item: OrderUpdateItem) ->
     TODO: includes ``top``
 
     Args:
-        sess: session
-        order_id: ``id`` of order
-        updated_item: updated item
+        sess (Session): session
+        order_id (str): ``id`` of order
+        updated_item (OrderUpdateItem): updated item
 
     Returns:
         OrderItem: updated order
@@ -151,8 +172,8 @@ def delete_order(sess: Session, order_id: str) -> None:
     """Delete an order
 
     Args:
-        sess: session
-        order_id: ``id`` of order
+        sess (Session): session
+        order_id (str): ``id`` of order
 
     Returns:
         None
