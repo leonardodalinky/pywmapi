@@ -30,7 +30,7 @@ class RivenItem(ModelBase):
     group: Group
     riven_type: WeaponType
     icon: str
-    icon_format: IconFormat
+    icon_format: Optional[IconFormat]
     thumb: str
     item_name: str
 

@@ -1,13 +1,12 @@
 import setuptools
 
-
 with open("README.md", "r", encoding="utf8") as fp:
     long_description = fp.read()
 
 
 setuptools.setup(
     name="pywmapi",
-    version="1.0.0",
+    version="1.1.1",
     author="leonardodalink",
     author_email="linkyy2000313@gmail.com",
     description="API for warframe market.",

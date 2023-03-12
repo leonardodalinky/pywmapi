@@ -43,7 +43,9 @@ class ModelBase:
         return cls._from_dict(d)
 
     @classmethod
-    def _from_dict(cls: Type[T], d: Dict[str, Any], config: Optional[Config] = Config()) -> T:
+    def _from_dict(
+        cls: Type[T], d: Dict[str, Any], config: Optional[Config] = Config()
+    ) -> T:
         if Enum not in config.cast:
             config.cast.append(Enum)
         if datetime not in config.type_hooks.keys():

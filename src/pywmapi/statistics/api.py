@@ -11,7 +11,9 @@ __all__ = [
 ]
 
 
-def get_statistic(url_name: str, platform: Optional[Platform] = Platform.pc) -> Statistic:
+def get_statistic(
+    url_name: str, platform: Optional[Platform] = Platform.pc
+) -> Statistic:
     """Get statistic of an item
 
     Args:
@@ -23,7 +25,7 @@ def get_statistic(url_name: str, platform: Optional[Platform] = Platform.pc) -> 
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/statistics",
-        headers={"Platform": platform},
+        headers={"Platform": platform.value},
     )
     check_wm_response(res)
     payload = res.json()["payload"]

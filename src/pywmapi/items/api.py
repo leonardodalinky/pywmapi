@@ -25,7 +25,7 @@ def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
     """
     res = requests.get(
         API_BASE_URL + "/items",
-        headers={"Language": lang},
+        headers={"Language": lang.value},
     )
     check_wm_response(res)
     return list(map(lambda x: ItemShort.from_dict(x), res.json()["payload"]["items"]))
@@ -45,7 +45,7 @@ def get_item(
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}",
-        headers={"Platform": platform},
+        headers={"Platform": platform.value},
     )
     check_wm_response(res)
     item_json = res.json()["payload"]["item"]

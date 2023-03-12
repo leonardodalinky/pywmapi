@@ -10,6 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 * Add shpinx documentation page(TODO).
 
+## [1.1.1] - 2023-03-13
+
+### Changed
+
+* Remove subclass `str` from enums due to the update of `requests`.
+* Resolve issue with missing `icon_format` in `rivens.list_items()`.
+
 ## [1.1.0] - 2022-03-26
 
 ### Added

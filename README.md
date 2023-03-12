@@ -1,6 +1,6 @@
 # pywmapi
 
-[![github action packaging test badge](https://img.shields.io/github/workflow/status/leonardodalinky/pywmapi/Python%20package%20test/main?label=main)](https://github.com/leonardodalinky/pywmapi/tree/main)
+[![github action packaging test badge](https://img.shields.io/github/actions/workflow/status/leonardodalinky/pywmapi/python-package-test.yml?branch=main)](https://github.com/leonardodalinky/pywmapi/tree/main)
 [![pypi package version badge](https://img.shields.io/pypi/v/pywmapi)](https://pypi.org/project/pywmapi/)
 ![python version badge](https://img.shields.io/badge/python-%3E%3D3.7-blue)
 [![license badge](https://img.shields.io/github/license/leonardodalinky/pywmapi)](https://github.com/leonardodalinky/pywmapi/blob/main/LICENSE)
@@ -47,6 +47,10 @@ For now, the implemented function is listed below:
 * rivens
   * ✅ list all riven items
   * ✅ get a list of riven attributes
+* misc
+  * 🔲 get a list of all known game locations
+  * 🔲 get a list of all known npcs
+  * 🔲 get a list of all known missions
 * auctions
   * ✅ create auction ⚠️
   * 🔲 get a list of riven auctions by given search params
@@ -150,6 +154,11 @@ Signin & get current orders:
 ```python
 sess = wm.auth.signin("your_account", "your_password")
 sell_orders, buy_orders = wm.orders.get_current_orders(sess)
+```
+
+To get all rivens templates:
+```python
+wm.rivens.list_items()
 ```
 
 Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.

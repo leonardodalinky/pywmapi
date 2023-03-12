@@ -23,7 +23,7 @@ def list_items(lang: Optional[Language] = Language.en) -> List[RivenItem]:
     """
     res = requests.get(
         API_BASE_URL + "/riven/items",
-        headers={"Language": lang},
+        headers={"Language": lang.value},
     )
     check_wm_response(res)
     return list(map(lambda x: RivenItem.from_dict(x), res.json()["payload"]["items"]))
@@ -40,7 +40,9 @@ def list_attrs(lang: Optional[Language] = Language.en) -> List[RivenAttribute]:
     """
     res = requests.get(
         API_BASE_URL + "/riven/attributes",
-        headers={"Language": lang},
+        headers={"Language": lang.value},
     )
     check_wm_response(res)
-    return list(map(lambda x: RivenAttribute.from_dict(x), res.json()["payload"]["attributes"]))
+    return list(
+        map(lambda x: RivenAttribute.from_dict(x), res.json()["payload"]["attributes"])
+    )

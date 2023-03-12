@@ -44,14 +44,16 @@ class Session:
         def _ws_on_open(wsapp: WebSocketApp):
             self._is_ws_open = True
 
-        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None):
+        def _ws_on_message(
+            wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None
+        ):
             out_queue.put(message)
             if on_message is not None:
                 on_message(message)
 
         def _wsapp_func():
             self._wsapp = WebSocketApp(
-                WSS_BASE_URL + f"?platform={ws_platform}",
+                WSS_BASE_URL + f"?platform={ws_platform.value}",
                 cookie=f"JWT={jwt}",
                 on_open=_ws_on_open,
                 on_message=partial(_ws_on_message, out_queue=self.recv_messages),

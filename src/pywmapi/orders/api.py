@@ -45,8 +45,8 @@ def get_orders(
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/orders",
-        params={"include": include},
-        headers={"Platform": platform},
+        params={"include": include.value},
+        headers={"Platform": platform.value},
     )
     check_wm_response(res)
     json_obj = res.json()
@@ -143,7 +143,9 @@ def add_order(sess: Session, new_item: OrderNewItem) -> OrderItem:
     return OrderItem.from_dict(json_obj["payload"]["order"])
 
 
-def update_order(sess: Session, order_id: str, updated_item: OrderUpdateItem) -> OrderItem:
+def update_order(
+    sess: Session, order_id: str, updated_item: OrderUpdateItem
+) -> OrderItem:
     """Update an order
 
     TODO: includes ``top``

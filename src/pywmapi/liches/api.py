@@ -24,10 +24,12 @@ def list_weapons(lang: Optional[Language] = Language.en) -> List[LichWeapon]:
     """
     res = requests.get(
         API_BASE_URL + "/lich/weapons",
-        headers={"Language": lang},
+        headers={"Language": lang.value},
     )
     check_wm_response(res)
-    return list(map(lambda x: LichWeapon.from_dict(x), res.json()["payload"]["weapons"]))
+    return list(
+        map(lambda x: LichWeapon.from_dict(x), res.json()["payload"]["weapons"])
+    )
 
 
 def list_ephemeras(lang: Optional[Language] = Language.en) -> List[LichEphemera]:
@@ -41,10 +43,12 @@ def list_ephemeras(lang: Optional[Language] = Language.en) -> List[LichEphemera]
     """
     res = requests.get(
         API_BASE_URL + "/lich/ephemeras",
-        headers={"Language": lang},
+        headers={"Language": lang.value},
     )
     check_wm_response(res)
-    return list(map(lambda x: LichEphemera.from_dict(x), res.json()["payload"]["ephemeras"]))
+    return list(
+        map(lambda x: LichEphemera.from_dict(x), res.json()["payload"]["ephemeras"])
+    )
 
 
 def list_quirks(lang: Optional[Language] = Language.en) -> List[LichQuirk]:
@@ -58,7 +62,7 @@ def list_quirks(lang: Optional[Language] = Language.en) -> List[LichQuirk]:
     """
     res = requests.get(
         API_BASE_URL + "/lich/quirks",
-        headers={"Language": lang},
+        headers={"Language": lang.value},
     )
     check_wm_response(res)
     return list(map(lambda x: LichQuirk.from_dict(x), res.json()["payload"]["quirks"]))
