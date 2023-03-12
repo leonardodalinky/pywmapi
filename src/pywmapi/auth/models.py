@@ -44,9 +44,7 @@ class Session:
         def _ws_on_open(wsapp: WebSocketApp):
             self._is_ws_open = True
 
-        def _ws_on_message(
-            wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None
-        ):
+        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None):
             out_queue.put(message)
             if on_message is not None:
                 on_message(message)

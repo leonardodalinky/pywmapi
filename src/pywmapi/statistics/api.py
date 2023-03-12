@@ -11,9 +11,7 @@ __all__ = [
 ]
 
 
-def get_statistic(
-    url_name: str, platform: Optional[Platform] = Platform.pc
-) -> Statistic:
+def get_statistic(url_name: str, platform: Optional[Platform] = Platform.pc) -> Statistic:
     """Get statistic of an item
 
     Args:

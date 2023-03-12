@@ -69,9 +69,7 @@ def signin(
     )
     check_wm_response(res)
     user = User.from_dict(res.json()["payload"]["user"])
-    return Session(
-        res.cookies["JWT"], csrf_token, user, ws_platform, on_message=ws_on_message
-    )
+    return Session(res.cookies["JWT"], csrf_token, user, ws_platform, on_message=ws_on_message)
 
 
 def restore(email: str) -> None:

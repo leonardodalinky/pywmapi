@@ -43,6 +43,4 @@ def list_attrs(lang: Optional[Language] = Language.en) -> List[RivenAttribute]:
         headers={"Language": lang.value},
     )
     check_wm_response(res)
-    return list(
-        map(lambda x: RivenAttribute.from_dict(x), res.json()["payload"]["attributes"])
-    )
+    return list(map(lambda x: RivenAttribute.from_dict(x), res.json()["payload"]["attributes"]))

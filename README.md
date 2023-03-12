@@ -1,6 +1,6 @@
 # pywmapi
 
-[![github action packaging test badge](https://img.shields.io/github/actions/workflow/status/leonardodalinky/pywmapi/python-package-test.yml?branch=main)](https://github.com/leonardodalinky/pywmapi/tree/main)
+[![github action packaging test badge](https://img.shields.io/github/actions/workflow/status/leonardodalinky/pywmapi/python-package-test-main.yml?branch=main)](https://github.com/leonardodalinky/pywmapi/tree/main)
 [![pypi package version badge](https://img.shields.io/pypi/v/pywmapi)](https://pypi.org/project/pywmapi/)
 ![python version badge](https://img.shields.io/badge/python-%3E%3D3.7-blue)
 [![license badge](https://img.shields.io/github/license/leonardodalinky/pywmapi)](https://github.com/leonardodalinky/pywmapi/blob/main/LICENSE)

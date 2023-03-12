@@ -143,9 +143,7 @@ def add_order(sess: Session, new_item: OrderNewItem) -> OrderItem:
     return OrderItem.from_dict(json_obj["payload"]["order"])
 
 
-def update_order(
-    sess: Session, order_id: str, updated_item: OrderUpdateItem
-) -> OrderItem:
+def update_order(sess: Session, order_id: str, updated_item: OrderUpdateItem) -> OrderItem:
     """Update an order
 
     TODO: includes ``top``
