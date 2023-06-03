@@ -45,7 +45,7 @@ def get_orders(
     """
     res = requests.get(
         API_BASE_URL + f"/items/{url_name}/orders",
-        params={"include": include.value},
+        params={"include": include.value if include is not None else None},
         headers={"Platform": platform.value},
     )
     check_wm_response(res)
