@@ -10,6 +10,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 * Add shpinx documentation page(TODO).
 
+## [1.1.2] - 2023-09-12
+
+### Added
+
+* Github Action workflow for automatical release.
+* `pre-commit-hooks` for development.
+
+### Changed
+
+* Fix AttributeError `include` is None in `orders` API.
+* Update build dependencies.
+
 ## [1.1.1] - 2023-03-13
 
 ### Changed

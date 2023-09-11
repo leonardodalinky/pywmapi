@@ -64,19 +64,19 @@ flake8:
 
 .PHONY: black
 black:
-	${PYTHON} -m ${BLACK} -l 100 -t py37 src test
+	${PYTHON} -m ${BLACK} -l 100 -t py37 ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: black-check
 black-check:
-	${PYTHON} -m ${BLACK} -l 100 -t py37 --check src test
+	${PYTHON} -m ${BLACK} -l 100 -t py37 --check ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: isort
 isort:
-	${PYTHON} -m ${ISORT} --profile black -m 3 -l 80 ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${ISORT} --profile black -l 100 ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: isort-check
 isort-check:
-	${PYTHON} -m ${ISORT} --profile black -m 3 -l 80 --check ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${ISORT} --profile black -l 100 --check ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: uninstall
 uninstall:
