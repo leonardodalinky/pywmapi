@@ -32,6 +32,8 @@ class OrderCommon(ModelBase):
     closed_date: Optional[datetime]
     last_update: Optional[datetime]
     visible: bool
+    subtype: Optional[Subtype]
+    mod_rank: Optional[int]
 
 
 @dataclass
@@ -89,6 +91,7 @@ class OrderNewItemBase(ModelBase):
     platinum: int
     quantity: int
     rank: Optional[int]
+    subtype: Optional[Subtype]
     visible: bool
 
 

@@ -80,3 +80,29 @@ class Polarity(Enum):
     penjaga = "penjaga"
     umbra = "umbra"
     aura = "aura"
+
+
+class Subtype(Enum):
+    # Cetus fishes subtypes
+    large = "large"
+    medium = "medium"
+    small = "small"
+
+    # Fortuna fishes subtypes
+    magnificent = "magnificent"
+    adorned = "adorned"
+    basic = "basic"
+
+    # Special weapons parts subtypes
+    blueprint = "blueprint"
+    crafted = "crafted"
+
+    # Relics subtypes
+    radiant = "radiant"
+    flawless = "flawless"
+    exceptional = "exceptional"
+    intact = "intact"
+
+    # Veiled riven mods subtypes
+    revealed = "revealed"
+    unrevealed = "unrevealed"
