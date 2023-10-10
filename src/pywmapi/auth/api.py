@@ -2,7 +2,6 @@ from enum import Enum
 from typing import Optional, Tuple
 
 import requests
-from bs4 import BeautifulSoup
 
 from ..common import *
 from ..exceptions import *
@@ -24,8 +23,12 @@ def get_csrf_and_jwt() -> Tuple[str, str]:
     """
     # get csrf_token first
     res = requests.get(HOMEPAGE_URL)
-    soup = BeautifulSoup(res.text, features="html.parser")
-    csrf_token = soup.find("meta", attrs={"name": "csrf-token"})["content"]
+    content = res.text
+    csrf_token = (
+        content.split("csrf-token", maxsplit=1)[1]
+        .split("content=", maxsplit=1)[1]
+        .split('"', maxsplit=2)[1]
+    )
     # then get jwt
     jwt = res.cookies["JWT"]
     return csrf_token, jwt
