@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Generic, Optional, Type, TypeVar
+from typing import Any, Dict, Generic, Type, TypeVar
 
 from dacite import Config, from_dict
 
@@ -43,7 +43,7 @@ class ModelBase:
         return cls._from_dict(d)
 
     @classmethod
-    def _from_dict(cls: Type[T], d: Dict[str, Any], config: Optional[Config] = Config()) -> T:
+    def _from_dict(cls: Type[T], d: Dict[str, Any], config: Config = Config()) -> T:
         if Enum not in config.cast:
             config.cast.append(Enum)
         if datetime not in config.type_hooks.keys():
@@ -54,7 +54,7 @@ class ModelBase:
 @dataclass(init=False)
 class WSMessage(Generic[T]):
     type: WSType
-    payload: T
+    payload: Type[T]
 
     def __init__(self, type: WSType, payload: Type[T]) -> None:
         super().__init__()

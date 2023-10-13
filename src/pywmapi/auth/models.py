@@ -8,7 +8,6 @@ from queue import Queue
 from threading import Thread
 from typing import Dict, Optional, TypeVar
 
-from dacite import Config
 from websocket import ABNF, WebSocketApp
 
 from ..common import *
@@ -25,6 +24,15 @@ T = TypeVar("T")
 
 
 class Session:
+    jwt: str
+    csrf_token: str
+    user: "User"
+    ws_platform: Platform
+    recv_messages: Queue
+    _is_ws_open: bool
+    _wsapp: WebSocketApp
+    _wsapp_thread: Thread
+
     def __init__(
         self,
         jwt: str,
@@ -39,12 +47,11 @@ class Session:
         self.ws_platform = ws_platform
         self.recv_messages = Queue()
         self._is_ws_open = False
-        self._wsapp: Optional[WebSocketApp] = None
 
         def _ws_on_open(wsapp: WebSocketApp):
             self._is_ws_open = True
 
-        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None):
+        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Queue):
             out_queue.put(message)
             if on_message is not None:
                 on_message(message)

@@ -24,7 +24,7 @@ __all__ = [
 
 def get_orders(
     url_name: str,
-    platform: Optional[Platform] = Platform.pc,
+    platform: Platform = Platform.pc,
     include: Optional[IncludeOption] = None,
 ) -> Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
     """Get orders of an item

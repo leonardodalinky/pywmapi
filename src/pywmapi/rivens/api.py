@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Tuple, Union
+from typing import List
 
 import requests
 
@@ -12,7 +12,7 @@ __all__ = [
 ]
 
 
-def list_items(lang: Optional[Language] = Language.en) -> List[RivenItem]:
+def list_items(lang: Language = Language.en) -> List[RivenItem]:
     """List all riven templates
 
     Args:
@@ -29,7 +29,7 @@ def list_items(lang: Optional[Language] = Language.en) -> List[RivenItem]:
     return list(map(lambda x: RivenItem.from_dict(x), res.json()["payload"]["items"]))
 
 
-def list_attrs(lang: Optional[Language] = Language.en) -> List[RivenAttribute]:
+def list_attrs(lang: Language = Language.en) -> List[RivenAttribute]:
     """List all riven attributes
 
     Args:

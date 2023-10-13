@@ -43,7 +43,7 @@ def signin(
     email: str,
     password: str,
     device_id: Optional[str] = None,
-    auth_type: Optional[SigninAuthtype] = SigninAuthtype.cookie,
+    auth_type: SigninAuthtype = SigninAuthtype.cookie,
     ws_platform: Platform = Platform.pc,
     ws_on_message: Optional[MessageCallback] = None,
 ) -> Session:

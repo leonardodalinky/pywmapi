@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-from datetime import time
-from typing import Any, Dict, List, Optional, Union
+from typing import List, Optional, Union
 
 from ...common import AuctionType, ElementType, ModelBase, Platform, Polarity
 
