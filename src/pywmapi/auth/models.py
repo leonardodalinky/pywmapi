@@ -6,7 +6,7 @@ from enum import Enum
 from functools import partial
 from queue import Queue
 from threading import Thread
-from typing import Dict, Optional, TypeVar
+from typing import Any, Dict, Optional, TypeVar
 
 from websocket import ABNF, WebSocketApp
 
@@ -25,7 +25,6 @@ T = TypeVar("T")
 
 class Session:
     jwt: str
-    csrf_token: str
     user: "User"
     ws_platform: Platform
     recv_messages: Queue
@@ -36,13 +35,11 @@ class Session:
     def __init__(
         self,
         jwt: str,
-        csrf_token: str,
         user: "User",
         ws_platform: Platform,
         on_message: Optional[MessageCallback],
     ) -> None:
         self.jwt = jwt
-        self.csrf_token = csrf_token
         self.user = user
         self.ws_platform = ws_platform
         self.recv_messages = Queue()
@@ -90,15 +87,14 @@ class Session:
     def __del__(self):
         self._wsapp.close()
 
-    def to_header_dict(self) -> Dict[str, Dict[str, str]]:
+    def to_header_dict(self) -> Dict[str, Any]:
         """get the key/value dict for request header
 
         Returns:
-            Dict[str, Dict[str, str]]:
+            Dict[str, Any]:
         """
         return {
-            "headers": {"X-CSRFToken": self.csrf_token},
-            "cookies": {"JWT": self.jwt},
+            "headers": {"Authorization": self.jwt},
         }
 
 
