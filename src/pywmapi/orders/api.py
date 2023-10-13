@@ -1,5 +1,5 @@
 from dataclasses import asdict
-from typing import Dict, List, Optional, Tuple, Union
+from typing import List, Optional, overload, Tuple, Union
 
 import requests
 
@@ -21,6 +21,18 @@ __all__ = [
     "delete_order",
 ]
 
+
+@overload
+def get_orders(url_name: str, platform: Platform = Platform.pc) -> List[OrderRow]:
+    ...
+
+@overload
+def get_orders(
+    url_name: str,
+    platform: Platform = Platform.pc,
+    include: IncludeOption = IncludeOption.item,
+) -> Tuple[List[OrderRow], ItemFull, List[ItemFull]]:
+    ...
 
 def get_orders(
     url_name: str,
