@@ -1,14 +1,14 @@
 from enum import Enum
 
 
-class Platform(Enum):
+class Platform(str, Enum):
     pc = "pc"
     xbox = "xbox"
     ps4 = "ps4"
     switch = "switch"
 
 
-class Language(Enum):
+class Language(str, Enum):
     en = "en"
     ru = "ru"
     ko = "ko"
@@ -22,16 +22,16 @@ class Language(Enum):
     pl = "pl"
 
 
-class OrderType(Enum):
+class OrderType(str, Enum):
     sell = "sell"
     buy = "buy"
 
 
-class IncludeOption(Enum):
+class IncludeOption(str, Enum):
     item = "item"
 
 
-class WeaponType(Enum):
+class WeaponType(str, Enum):
     shotgun = "shotgun"
     rifle = "rifle"
     pistol = "pistol"
@@ -40,12 +40,12 @@ class WeaponType(Enum):
     kitgun = "kitgun"
 
 
-class IconFormat(Enum):
+class IconFormat(str, Enum):
     land = "land"
     port = "port"
 
 
-class ElementType(Enum):
+class ElementType(str, Enum):
     impact = "impact"
     heat = "heat"
     cold = "cold"
@@ -55,23 +55,23 @@ class ElementType(Enum):
     radiation = "radiation"
 
 
-class ProfileStatus(Enum):
+class ProfileStatus(str, Enum):
     offline = "offline"
     online = "online"
     ingame = "ingame"
 
 
-class WSType(Enum):
+class WSType(str, Enum):
     SET_STATUS = "@WS/USER/SET_STATUS"
 
 
-class AuctionType(Enum):
+class AuctionType(str, Enum):
     riven = "riven"
     lich = "lich"
     kubrow = "kubrow"
 
 
-class Polarity(Enum):
+class Polarity(str, Enum):
     madurai = "madurai"
     vazarin = "vazarin"
     naramon = "naramon"
@@ -82,7 +82,7 @@ class Polarity(Enum):
     aura = "aura"
 
 
-class Subtype(Enum):
+class Subtype(str, Enum):
     # Cetus fishes subtypes
     large = "large"
     medium = "medium"
