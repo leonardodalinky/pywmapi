@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Tuple, Union
+from typing import List, Tuple
 from warnings import warn
 
 import requests
@@ -14,7 +14,7 @@ __all__ = [
 ]
 
 
-def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
+def list_items(lang: Language = Language.en) -> List[ItemShort]:
     """List all the tradable items in wm's databases
 
     Args:
@@ -31,9 +31,7 @@ def list_items(lang: Optional[Language] = Language.en) -> List[ItemShort]:
     return list(map(lambda x: ItemShort.from_dict(x), res.json()["payload"]["items"]))
 
 
-def get_item(
-    url_name: str, platform: Optional[Platform] = Platform.pc
-) -> Tuple[ItemFull, List[ItemFull]]:
+def get_item(url_name: str, platform: Platform = Platform.pc) -> Tuple[ItemFull, List[ItemFull]]:
     """Get info of an item
 
     Args:

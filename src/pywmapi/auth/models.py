@@ -6,9 +6,8 @@ from enum import Enum
 from functools import partial
 from queue import Queue
 from threading import Thread
-from typing import Dict, Optional, TypeVar
+from typing import Any, Dict, Optional, TypeVar
 
-from dacite import Config
 from websocket import ABNF, WebSocketApp
 
 from ..common import *
@@ -25,26 +24,31 @@ T = TypeVar("T")
 
 
 class Session:
+    jwt: str
+    user: "User"
+    ws_platform: Platform
+    recv_messages: Queue
+    _is_ws_open: bool
+    _wsapp: WebSocketApp
+    _wsapp_thread: Thread
+
     def __init__(
         self,
         jwt: str,
-        csrf_token: str,
         user: "User",
         ws_platform: Platform,
         on_message: Optional[MessageCallback],
     ) -> None:
         self.jwt = jwt
-        self.csrf_token = csrf_token
         self.user = user
         self.ws_platform = ws_platform
         self.recv_messages = Queue()
         self._is_ws_open = False
-        self._wsapp: Optional[WebSocketApp] = None
 
         def _ws_on_open(wsapp: WebSocketApp):
             self._is_ws_open = True
 
-        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Optional[Queue] = None):
+        def _ws_on_message(wsapp: WebSocketApp, message: str, out_queue: Queue):
             out_queue.put(message)
             if on_message is not None:
                 on_message(message)
@@ -83,15 +87,14 @@ class Session:
     def __del__(self):
         self._wsapp.close()
 
-    def to_header_dict(self) -> Dict[str, Dict[str, str]]:
+    def to_header_dict(self) -> Dict[str, Any]:
         """get the key/value dict for request header
 
         Returns:
-            Dict[str, Dict[str, str]]:
+            Dict[str, Any]:
         """
         return {
-            "headers": {"X-CSRFToken": self.csrf_token},
-            "cookies": {"JWT": self.jwt},
+            "headers": {"Authorization": self.jwt},
         }
 
 

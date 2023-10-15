@@ -1,10 +1,9 @@
-beautifulsoup4>=4
-dacite>=1.6
-requests>=2
-websocket-client>=1.2
-pytest
-twine
-sphinx
 black
 build
+dacite>=1.6
 isort
+pytest
+requests>=2
+sphinx
+twine
+websocket-client>=1.2

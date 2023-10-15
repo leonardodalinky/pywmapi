@@ -1,5 +1,5 @@
 from dataclasses import asdict
-from typing import Dict, List, Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union, overload
 
 import requests
 
@@ -22,9 +22,23 @@ __all__ = [
 ]
 
 
+@overload
+def get_orders(url_name: str, platform: Platform = Platform.pc) -> List[OrderRow]:
+    ...
+
+
+@overload
 def get_orders(
     url_name: str,
-    platform: Optional[Platform] = Platform.pc,
+    platform: Platform = Platform.pc,
+    include: IncludeOption = IncludeOption.item,
+) -> Tuple[List[OrderRow], ItemFull, List[ItemFull]]:
+    ...
+
+
+def get_orders(
+    url_name: str,
+    platform: Platform = Platform.pc,
     include: Optional[IncludeOption] = None,
 ) -> Union[List[OrderRow], Tuple[List[OrderRow], ItemFull, List[ItemFull]]]:
     """Get orders of an item

@@ -1,34 +1,29 @@
 from enum import Enum
-from typing import Optional, Tuple
+from typing import Optional
 
 import requests
-from bs4 import BeautifulSoup
 
 from ..common import *
 from ..exceptions import *
 from .models import *
 
 __all__ = [
-    "get_csrf_and_jwt",
+    "get_jwt_token",
     "SigninAuthtype",
     "signin",
     # "restore",
 ]
 
 
-def get_csrf_and_jwt() -> Tuple[str, str]:
-    """Get csrf token and jwt token
+def get_jwt_token() -> str:
+    """Get jwt token
 
     Returns:
-        Tuple[str, str]: csrf & jwt
+        str: jwt
     """
     # get csrf_token first
-    res = requests.get(HOMEPAGE_URL)
-    soup = BeautifulSoup(res.text, features="html.parser")
-    csrf_token = soup.find("meta", attrs={"name": "csrf-token"})["content"]
-    # then get jwt
-    jwt = res.cookies["JWT"]
-    return csrf_token, jwt
+    res = requests.get(API_BASE_URL)
+    return res.cookies["JWT"]
 
 
 class SigninAuthtype(str, Enum):
@@ -40,7 +35,7 @@ def signin(
     email: str,
     password: str,
     device_id: Optional[str] = None,
-    auth_type: Optional[SigninAuthtype] = SigninAuthtype.cookie,
+    auth_type: SigninAuthtype = SigninAuthtype.header,
     ws_platform: Platform = Platform.pc,
     ws_on_message: Optional[MessageCallback] = None,
 ) -> Session:
@@ -55,7 +50,7 @@ def signin(
     Returns:
         Session: session for the login state
     """
-    csrf_token, jwt = get_csrf_and_jwt()
+    jwt = get_jwt_token()
     res = requests.post(
         API_BASE_URL + "/auth/signin",
         json={
@@ -64,12 +59,11 @@ def signin(
             "device_id": device_id,
             "auth_type": auth_type.value,
         },
-        headers={"X-CSRFToken": csrf_token},
-        cookies={"JWT": jwt},
+        headers={"Authorization": jwt},
     )
     check_wm_response(res)
     user = User.from_dict(res.json()["payload"]["user"])
-    return Session(res.cookies["JWT"], csrf_token, user, ws_platform, on_message=ws_on_message)
+    return Session(res.headers["Authorization"], user, ws_platform, on_message=ws_on_message)
 
 
 def restore(email: str) -> None:

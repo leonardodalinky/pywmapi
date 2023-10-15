@@ -1,5 +1,3 @@
-from typing import Dict, List, Optional, Tuple, Union
-
 import requests
 
 from ..auth import Session, User

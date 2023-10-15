@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Tuple, Union
+from typing import List, Optional
 
 import requests
 
@@ -13,7 +13,7 @@ __all__ = [
 ]
 
 
-def list_weapons(lang: Optional[Language] = Language.en) -> List[LichWeapon]:
+def list_weapons(lang: Language = Language.en) -> List[LichWeapon]:
     """List all lich weapons
 
     Args:
@@ -30,7 +30,7 @@ def list_weapons(lang: Optional[Language] = Language.en) -> List[LichWeapon]:
     return list(map(lambda x: LichWeapon.from_dict(x), res.json()["payload"]["weapons"]))
 
 
-def list_ephemeras(lang: Optional[Language] = Language.en) -> List[LichEphemera]:
+def list_ephemeras(lang: Language = Language.en) -> List[LichEphemera]:
     """List all lich ephemeras
 
     Args:
@@ -47,7 +47,7 @@ def list_ephemeras(lang: Optional[Language] = Language.en) -> List[LichEphemera]
     return list(map(lambda x: LichEphemera.from_dict(x), res.json()["payload"]["ephemeras"]))
 
 
-def list_quirks(lang: Optional[Language] = Language.en) -> List[LichQuirk]:
+def list_quirks(lang: Language = Language.en) -> List[LichQuirk]:
     """List all lich quirks
 
     Args:

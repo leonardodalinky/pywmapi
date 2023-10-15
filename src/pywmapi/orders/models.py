@@ -1,9 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
-from typing import Any, Dict, List, Optional
-
-from dacite import Config
+from typing import List, Optional
 
 from ..auth.models import UserShort
 from ..common import *
@@ -32,6 +29,8 @@ class OrderCommon(ModelBase):
     closed_date: Optional[datetime]
     last_update: Optional[datetime]
     visible: bool
+    subtype: Optional[Subtype]
+    mod_rank: Optional[int]
 
 
 @dataclass
@@ -89,6 +88,7 @@ class OrderNewItemBase(ModelBase):
     platinum: int
     quantity: int
     rank: Optional[int]
+    subtype: Optional[Subtype]
     visible: bool
 
 
