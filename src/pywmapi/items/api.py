@@ -31,9 +31,7 @@ def list_items(lang: Language = Language.en) -> List[ItemShort]:
     return list(map(lambda x: ItemShort.from_dict(x), res.json()["payload"]["items"]))
 
 
-def get_item(
-    url_name: str, platform: Platform = Platform.pc
-) -> Tuple[ItemFull, List[ItemFull]]:
+def get_item(url_name: str, platform: Platform = Platform.pc) -> Tuple[ItemFull, List[ItemFull]]:
     """Get info of an item
 
     Args:
