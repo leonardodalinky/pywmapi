@@ -2,7 +2,7 @@ PYTHON := python
 PROJECT_DIR = .
 SRC_DIR := ${PROJECT_DIR}/src
 PACKAGE_DIR := ${SRC_DIR}/pywmapi
-TEST_DIR := ${PROJECT_DIR}/test
+TEST_DIR := ${PROJECT_DIR}/tests
 
 PIPREQS := pipreqs
 BLACK := black
@@ -64,19 +64,19 @@ flake8:
 
 .PHONY: black
 black:
-	${PYTHON} -m ${BLACK} -l 100 -t py37 ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${BLACK} ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: black-check
 black-check:
-	${PYTHON} -m ${BLACK} -l 100 -t py37 --check ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${BLACK} --check ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: isort
 isort:
-	${PYTHON} -m ${ISORT} --profile black -l 100 ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${ISORT} ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: isort-check
 isort-check:
-	${PYTHON} -m ${ISORT} --profile black -l 100 --check ${PACKAGE_DIR} ${TEST_DIR}
+	${PYTHON} -m ${ISORT} ${PACKAGE_DIR} ${TEST_DIR}
 
 .PHONY: uninstall
 uninstall:

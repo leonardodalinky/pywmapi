@@ -22,8 +22,11 @@ class Profile(ModelBase):
         type: str
 
     id: str
+    """User ID."""
     ingame_name: str
+    """In-game name."""
     status: ProfileStatus
+    """Wfm status."""
     platform: Platform
     region: str
     banned: bool
@@ -32,9 +35,9 @@ class Profile(ModelBase):
     background: Optional[str]
     last_seen: datetime
     reputation: int
-    # HTML-rendered
     about: str
-    # raw
+    """User's about-me section. Rendered as HTML."""
     about_raw: str
+    """User's about-me section. Raw text."""
     own_profile: bool
     achievements: List[Achievement]

@@ -62,7 +62,8 @@ def signin(
         headers={"Authorization": jwt},
     )
     check_wm_response(res)
-    user = User.from_dict(res.json()["payload"]["user"])
+    data = res.json()["payload"]["user"]
+    user = User.from_dict(data)
     return Session(res.headers["Authorization"], user, ws_platform, on_message=ws_on_message)
 
 

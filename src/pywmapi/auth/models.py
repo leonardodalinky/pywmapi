@@ -142,17 +142,20 @@ class User(ModelBase):
         discord_profile: bool
 
     id: str
+    """User ID."""
     anonymous: bool
     verification: bool
+    """Whether the user is verified."""
     check_code: str
-    ingame_name: str
+    ingame_name: Optional[str]
+    """In-game name. Only get this field when `verification=True`."""
     patreon_profile: Optional[PatreonProfile]
     platform: Platform
     region: str
     banned: bool
     ban_reason: Optional[str]
     role: Role
-    avatar: str
+    avatar: Optional[str]
     background: Optional[str]
     linked_accounts: LinkedAccounts
     # `has_mail` is spelled as `has_email` mistakenly in the official api docs

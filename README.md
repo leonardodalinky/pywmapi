@@ -163,7 +163,7 @@ wm.rivens.list_items()
 
 Some of these function may have various optional params, such as `platform`, `lang`, `include`, etc.
 
-More APIs could be found in corresponding packages.
+More APIs and docs could be found in corresponding packages and docstrings.
 
 ## Reference
 
@@ -178,6 +178,8 @@ More APIs could be found in corresponding packages.
 See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
+Check out [CONTRIBUTE.md](CONTRIBUTE.md) for more information.
+
 Feel free to make any issue or PR! 😊
 
 *Or contact me in game!*

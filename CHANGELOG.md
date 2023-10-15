@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 * Add shpinx documentation page(TODO).
 
+## [1.1.3] - 2023-10-15
+
+### Changed
+
+* New method to get JWT token. Refer to [PR #6](https://github.com/leonardodalinky/pywmapi/pull/6).
+
 ## [1.1.2] - 2023-09-12
 
 ### Added
