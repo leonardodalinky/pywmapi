@@ -1,7 +1,7 @@
-from dataclasses import asdict
 from typing import Optional, Union
 
 import requests
+from attrs import asdict
 
 from ...auth.models import Session
 from ...common import *

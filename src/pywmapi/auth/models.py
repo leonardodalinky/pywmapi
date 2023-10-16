@@ -1,6 +1,4 @@
-import dataclasses
 import json
-from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
 from functools import partial
@@ -8,10 +6,12 @@ from queue import Queue
 from threading import Thread
 from typing import Any, Dict, Optional, TypeVar
 
+from attrs import asdict, define
 from websocket import ABNF, WebSocketApp
 
 from ..common import *
 from ..exceptions import *
+from ..utils import *
 
 __all__ = [
     "Session",
@@ -81,7 +81,9 @@ class Session:
             raise WMError(-1, "Websocket failed. Try to dive into the `raw_error`.", e)
 
     def send_msg(self, msg_data: WSMessage[T], opcode: int = ABNF.OPCODE_TEXT) -> None:
-        data = json.dumps(dataclasses.asdict(msg_data))
+        data = json.dumps(
+            asdict(msg_data, filter=dataclass_filter, value_serializer=dataclass_value_serializer)
+        )
         self.send_str(data, opcode=opcode)
 
     def __del__(self):
@@ -98,43 +100,44 @@ class Session:
         }
 
 
-@dataclass
+@define
 class UserShort:
-    class Status(str, Enum):
+    class Status(Enum):
         ingame = "ingame"
         online = "online"
         offline = "offline"
 
     id: str
-    ingame_name: str
     status: Status
     region: str
     reputation: int
-    avatar: Optional[str]
     last_seen: datetime
+    ingame_name: Optional[str] = None
+    """In-game name. Only get this field when `verification=True`."""
+    avatar: Optional[str] = None
 
 
-@dataclass
+@define
 class User(ModelBase):
-    class Role(str, Enum):
+    class Role(Enum):
         anonymous = "anonymous"
         user = "user"
         moderator = "moderator"
         admin = "admin"
 
-    class PatreonBadge(str, Enum):
+    class PatreonBadge(Enum):
         bronze = "bronze"
         gold = "gold"
         silver = "silver"
         platinum = "platinum"
 
-    @dataclass
+    @define
     class PatreonProfile:
         patreon_founder: bool
         subscription: bool
         patreon_badge: str
 
-    @dataclass
+    @define
     class LinkedAccounts:
         steam_profile: bool
         patreon_profile: bool
@@ -147,18 +150,18 @@ class User(ModelBase):
     verification: bool
     """Whether the user is verified."""
     check_code: str
-    ingame_name: Optional[str]
-    """In-game name. Only get this field when `verification=True`."""
-    patreon_profile: Optional[PatreonProfile]
     platform: Platform
     region: str
     banned: bool
-    ban_reason: Optional[str]
     role: Role
-    avatar: Optional[str]
-    background: Optional[str]
     linked_accounts: LinkedAccounts
     # `has_mail` is spelled as `has_email` mistakenly in the official api docs
     has_mail: bool
     written_reviews: int
     unread_messages: int
+    ingame_name: Optional[str] = None
+    """In-game name. Only get this field when `verification=True`."""
+    patreon_profile: Optional[PatreonProfile] = None
+    ban_reason: Optional[str] = None
+    avatar: Optional[str] = None
+    background: Optional[str] = None

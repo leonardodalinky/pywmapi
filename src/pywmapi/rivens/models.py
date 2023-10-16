@@ -1,6 +1,7 @@
-from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
+
+from attrs import define
 
 from ..common import *
 
@@ -10,9 +11,9 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class RivenItem(ModelBase):
-    class Group(str, Enum):
+    class Group(Enum):
         primary = "primary"
         secondary = "secondary"
         melee = "melee"
@@ -26,30 +27,30 @@ class RivenItem(ModelBase):
     group: Group
     riven_type: WeaponType
     icon: str
-    icon_format: Optional[IconFormat]
     thumb: str
     item_name: str
+    icon_format: Optional[IconFormat] = None
 
 
-@dataclass
+@define
 class RivenAttribute(ModelBase):
-    class Group(str, Enum):
+    class Group(Enum):
         default = "default"
         melee = "melee"
         top = "top"
 
-    class Units(str, Enum):
+    class Units(Enum):
         percent = "percent"
         seconds = "seconds"
 
     id: str
     url_name: str
     group: Group
-    prefix: Optional[str]
-    suffix: Optional[str]
     positive_is_negative: bool
-    exclusive_to: Optional[List[WeaponType]]
     effect: str
-    units: Optional[Units]
     negative_only: bool
     search_only: bool
+    prefix: Optional[str] = None
+    suffix: Optional[str] = None
+    exclusive_to: Optional[List[WeaponType]] = None
+    units: Optional[Units] = None

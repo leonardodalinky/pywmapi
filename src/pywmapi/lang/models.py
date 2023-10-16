@@ -1,5 +1,6 @@
-from dataclasses import dataclass
 from typing import List, Optional
+
+from attrs import define
 
 from ..common import *
 
@@ -8,9 +9,9 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class LangInItem(ModelBase):
-    @dataclass
+    @define
     class Drop:
         name: str
         link: Optional[str]

@@ -1,9 +1,8 @@
-from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
 from typing import Any, Dict, Generic, Type, TypeVar
 
-from dacite import Config, from_dict
+import attrs
+import cattrs
 
 from .enums import WSType
 
@@ -14,6 +13,8 @@ __all__ = [
     "ModelBase",
     "WSMessage",
 ]
+
+cattrs.register_structure_hook(datetime, lambda d, _: datetime.fromisoformat(d))
 
 
 def _transform_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
@@ -43,15 +44,11 @@ class ModelBase:
         return cls._from_dict(d)
 
     @classmethod
-    def _from_dict(cls: Type[T], d: Dict[str, Any], config: Config = Config()) -> T:
-        if Enum not in config.cast:
-            config.cast.append(Enum)
-        if datetime not in config.type_hooks.keys():
-            config.type_hooks[datetime] = datetime.fromisoformat
-        return from_dict(data_class=cls, data=_transform_underscore(d), config=config)
+    def _from_dict(cls: Type[T], d: Dict[str, Any]) -> T:
+        return cattrs.structure(_transform_underscore(d), cls)
 
 
-@dataclass(init=False)
+@attrs.define(init=False)
 class WSMessage(Generic[T]):
     type: WSType
     payload: Type[T]

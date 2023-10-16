@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from attrs import define
 
 from ..common import *
 
@@ -9,7 +9,7 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class LichWeapon(ModelBase):
     id: str
     url_name: str
@@ -19,7 +19,7 @@ class LichWeapon(ModelBase):
     item_name: str
 
 
-@dataclass
+@define
 class LichEphemera(ModelBase):
     id: str
     url_name: str
@@ -32,7 +32,7 @@ class LichEphemera(ModelBase):
     item_name: str
 
 
-@dataclass
+@define
 class LichQuirk(ModelBase):
     id: str
     url_name: str

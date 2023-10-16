@@ -12,6 +12,13 @@ def test_get_orders():
 
 
 @pytest.mark.skipif(get_test_signin_dict() is None, reason="No test account.")
+def test_get_current_orders():
+    d = get_test_signin_dict()
+    sess = signin(**d)
+    get_current_orders(sess)
+
+
+@pytest.mark.skipif(get_test_signin_dict() is None, reason="No test account.")
 def test_add_delete_order():
     d = get_test_signin_dict()
     sess = signin(**d)

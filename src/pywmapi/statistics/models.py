@@ -1,6 +1,7 @@
-from dataclasses import dataclass
 from datetime import datetime
 from typing import List, Optional
+
+from attrs import define, field
 
 from ..common import *
 
@@ -11,7 +12,7 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class StatisticClosed(ModelBase):
     datetime: datetime
     volume: int
@@ -22,14 +23,14 @@ class StatisticClosed(ModelBase):
     avg_price: float
     wa_price: float
     median: float
-    moving_avg: Optional[float]
     donch_top: int
     donch_bot: int
     id: str
-    mod_rank: Optional[int]
+    moving_avg: Optional[float] = None
+    mod_rank: Optional[int] = None
 
 
-@dataclass
+@define
 class StatisticLive(ModelBase):
     datetime: datetime
     volume: int
@@ -38,13 +39,13 @@ class StatisticLive(ModelBase):
     avg_price: float
     wa_price: float
     median: float
-    moving_avg: Optional[float]
     order_type: OrderType
     id: str
-    mod_rank: Optional[int]
+    moving_avg: Optional[float] = None
+    mod_rank: Optional[int] = None
 
 
-@dataclass
+@define
 class Statistic:
     closed_48h: List[StatisticClosed]
     closed_90d: List[StatisticClosed]

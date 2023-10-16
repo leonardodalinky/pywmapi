@@ -1,5 +1,6 @@
-from dataclasses import dataclass
 from typing import List, Optional, Union
+
+from attrs import define
 
 from ...common import AuctionType, ElementType, ModelBase, Platform, Polarity
 
@@ -13,14 +14,14 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class AttributeInRiven:
     positive: bool
     value: int
     url_name: str
 
 
-@dataclass
+@define
 class RivenAuction:
     attributes: List[AttributeInRiven]
     name: str
@@ -32,7 +33,7 @@ class RivenAuction:
     type: AuctionType = AuctionType.riven
 
 
-@dataclass
+@define
 class LichAuction:
     weapon_url_name: str
     element: ElementType
@@ -43,13 +44,13 @@ class LichAuction:
     type: AuctionType = AuctionType.lich
 
 
-@dataclass
+@define
 class KubrowAuction:
     name: Optional[str]
     type: AuctionType = AuctionType.kubrow
 
 
-@dataclass
+@define
 class AuctionEntry(ModelBase):
     id: str
     minimal_reputation: int

@@ -1,6 +1,7 @@
-from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional
+
+from attrs import define, field
 
 from ..auth.models import UserShort
 from ..common import *
@@ -17,32 +18,32 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class OrderCommon(ModelBase):
     id: str
     platinum: int
     quantity: int
     order_type: OrderType
     platform: Platform
-    region: Optional[str]
-    creation_date: Optional[datetime]
-    closed_date: Optional[datetime]
-    last_update: Optional[datetime]
     visible: bool
-    subtype: Optional[Subtype]
-    mod_rank: Optional[int]
+    region: Optional[str] = None
+    creation_date: Optional[datetime] = None
+    closed_date: Optional[datetime] = None
+    last_update: Optional[datetime] = None
+    subtype: Optional[Subtype] = None
+    mod_rank: Optional[int] = None
 
 
-@dataclass
+@define(kw_only=True)
 class OrderRow(OrderCommon):
     user: UserShort
 
 
-@dataclass
+@define(kw_only=True)
 class OrderItem(OrderCommon):
-    @dataclass
+    @define
     class ItemInOrder(ModelBase):
-        @dataclass
+        @define
         class LangInOrderItem:
             item_name: str
 
@@ -50,49 +51,49 @@ class OrderItem(OrderCommon):
         url_name: str
         icon: str
         thumb: str
-        sub_icon: Optional[str]
-        quantity_for_set: Optional[int]
-        mod_max_rank: Optional[int]
         # only for relics and fishes
-        subtypes: Optional[List[str]]
         tags: List[str]
-        cyan_stars: Optional[int]
-        amber_stars: Optional[int]
-        ducats: Optional[int]
+        sub_icon: Optional[str] = None
+        quantity_for_set: Optional[int] = None
+        mod_max_rank: Optional[int] = None
+        subtypes: Optional[List[str]] = None
+        cyan_stars: Optional[int] = None
+        amber_stars: Optional[int] = None
+        ducats: Optional[int] = None
         # language items
-        en: Optional[LangInOrderItem]
-        ru: Optional[LangInOrderItem]
-        ko: Optional[LangInOrderItem]
-        de: Optional[LangInOrderItem]
-        fr: Optional[LangInOrderItem]
-        pt: Optional[LangInOrderItem]
-        zh_hant: Optional[LangInOrderItem]
-        zh_hans: Optional[LangInOrderItem]
-        es: Optional[LangInOrderItem]
-        it: Optional[LangInOrderItem]
-        pl: Optional[LangInOrderItem]
+        en: Optional[LangInOrderItem] = None
+        ru: Optional[LangInOrderItem] = None
+        ko: Optional[LangInOrderItem] = None
+        de: Optional[LangInOrderItem] = None
+        fr: Optional[LangInOrderItem] = None
+        pt: Optional[LangInOrderItem] = None
+        zh_hant: Optional[LangInOrderItem] = None
+        zh_hans: Optional[LangInOrderItem] = None
+        es: Optional[LangInOrderItem] = None
+        it: Optional[LangInOrderItem] = None
+        pl: Optional[LangInOrderItem] = None
 
-    user: Optional[UserShort]
     item: ItemInOrder
+    user: Optional[UserShort] = None
 
 
-@dataclass
+@define(kw_only=True)
 class OrderFull(OrderRow):
     # TODO
     def __init__(self):
         raise NotImplementedError()
 
 
-@dataclass
+@define(kw_only=True)
 class OrderNewItemBase(ModelBase):
     platinum: int
     quantity: int
     visible: bool
-    rank: Optional[int] = field(default=None)
-    subtype: Optional[Subtype] = field(default=None)
+    rank: Optional[int] = None
+    subtype: Optional[Subtype] = None
 
 
-@dataclass
+@define(kw_only=True)
 class OrderNewItem(OrderNewItemBase):
     """
     Request class for ``orders.add_new_order`` and others.
@@ -102,7 +103,7 @@ class OrderNewItem(OrderNewItemBase):
     order_type: OrderType
 
 
-@dataclass
+@define(kw_only=True)
 class OrderUpdateItem(OrderNewItemBase):
     """
     Request class for ``orders.update_order``

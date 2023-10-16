@@ -1,6 +1,7 @@
+attrs>=22
 black
 build
-dacite>=1.6
+cattrs>=22
 isort
 pytest
 requests>=2

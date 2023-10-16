@@ -1,6 +1,7 @@
-from dataclasses import dataclass
 from datetime import datetime
 from typing import List, Optional
+
+from attrs import define, field
 
 from ..common import *
 
@@ -10,9 +11,9 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class Profile(ModelBase):
-    @dataclass
+    @define
     class Achievement:
         name: str
         icon: str
@@ -30,9 +31,7 @@ class Profile(ModelBase):
     platform: Platform
     region: str
     banned: bool
-    ban_reason: Optional[str]
     avatar: str
-    background: Optional[str]
     last_seen: datetime
     reputation: int
     about: str
@@ -41,3 +40,5 @@ class Profile(ModelBase):
     """User's about-me section. Raw text."""
     own_profile: bool
     achievements: List[Achievement]
+    ban_reason: Optional[str] = None
+    background: Optional[str] = None

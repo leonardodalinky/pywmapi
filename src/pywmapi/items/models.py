@@ -1,6 +1,7 @@
-from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
+
+from attrs import define
 
 from ..common import *
 from ..lang.models import LangInItem
@@ -11,7 +12,7 @@ __all__ = [
 ]
 
 
-@dataclass
+@define
 class ItemShort(ModelBase):
     id: str
     url_name: str
@@ -19,9 +20,9 @@ class ItemShort(ModelBase):
     item_name: str
 
 
-@dataclass
+@define
 class ItemFull(ModelBase):
-    class Rarity(str, Enum):
+    class Rarity(Enum):
         common = "common"
         uncommon = "uncommon"
         rare = "rare"
@@ -34,31 +35,31 @@ class ItemFull(ModelBase):
     """Item URL name."""
     icon: str
     thumb: str
-    sub_icon: Optional[str]
-    quantity_for_set: Optional[int]
-    mod_max_rank: Optional[int]
+    tags: List[str]
+    trading_tax: int
+    sub_icon: Optional[str] = None
+    quantity_for_set: Optional[int] = None
+    mod_max_rank: Optional[int] = None
     """Max rank for mods. Only for mods."""
     # only for relics and fishes
-    subtypes: Optional[List[str]]
-    tags: List[str]
-    cyan_stars: Optional[int]
+    subtypes: Optional[List[str]] = None
+    cyan_stars: Optional[int] = None
     """Cyan stars count. Only for Ayatan Treasures."""
-    amber_stars: Optional[int]
+    amber_stars: Optional[int] = None
     """Amber stars count. Only for Ayatan Treasures."""
-    ducats: Optional[int]
-    set_root: Optional[bool]
-    mastery_level: Optional[int]
-    rarity: Optional[Rarity]
-    trading_tax: int
+    ducats: Optional[int] = None
+    set_root: Optional[bool] = None
+    mastery_level: Optional[int] = None
+    rarity: Optional[Rarity] = None
     # language items
-    en: Optional[LangInItem]
-    ru: Optional[LangInItem]
-    ko: Optional[LangInItem]
-    de: Optional[LangInItem]
-    fr: Optional[LangInItem]
-    pt: Optional[LangInItem]
-    zh_hant: Optional[LangInItem]
-    zh_hans: Optional[LangInItem]
-    es: Optional[LangInItem]
-    it: Optional[LangInItem]
-    pl: Optional[LangInItem]
+    en: Optional[LangInItem] = None
+    ru: Optional[LangInItem] = None
+    ko: Optional[LangInItem] = None
+    de: Optional[LangInItem] = None
+    fr: Optional[LangInItem] = None
+    pt: Optional[LangInItem] = None
+    zh_hant: Optional[LangInItem] = None
+    zh_hans: Optional[LangInItem] = None
+    es: Optional[LangInItem] = None
+    it: Optional[LangInItem] = None
+    pl: Optional[LangInItem] = None
