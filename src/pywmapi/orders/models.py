@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional
 
@@ -87,9 +87,9 @@ class OrderFull(OrderRow):
 class OrderNewItemBase(ModelBase):
     platinum: int
     quantity: int
-    rank: Optional[int]
-    subtype: Optional[Subtype]
     visible: bool
+    rank: Optional[int] = field(default=None)
+    subtype: Optional[Subtype] = field(default=None)
 
 
 @dataclass

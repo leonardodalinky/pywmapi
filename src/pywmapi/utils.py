@@ -1,8 +1,9 @@
+from enum import Enum
 from typing import Dict
 
 
-def dataclass_ignore_none_factory(x) -> Dict:
-    """used as ``dict_factory`` in function ``dataclasses.asdict`` to removed ``None` field in the result json dict.
+def dataclass_wm_factory(x) -> Dict:
+    """Used as `dict_factory` in function `dataclasses.asdict` to remove `None` field in the result json dict.
 
     Args:
         x: object
@@ -10,4 +11,10 @@ def dataclass_ignore_none_factory(x) -> Dict:
     Returns:
         Dict:
     """
-    return {k: v for (k, v) in x if v is not None}
+
+    def convert_value(obj):
+        if isinstance(obj, Enum):
+            return obj.value
+        return obj
+
+    return {k: convert_value(v) for k, v in x if v is not None}

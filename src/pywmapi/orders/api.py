@@ -149,7 +149,7 @@ def add_order(sess: Session, new_item: OrderNewItem) -> OrderItem:
     """
     res = requests.post(
         API_BASE_URL + "/profile/orders",
-        json=asdict(new_item, dict_factory=dataclass_ignore_none_factory),
+        json=asdict(new_item, dict_factory=dataclass_wm_factory),
         **sess.to_header_dict(),
     )
     check_wm_response(res)
@@ -171,7 +171,7 @@ def update_order(sess: Session, order_id: str, updated_item: OrderUpdateItem) ->
         OrderItem: updated order
     """
     req_json = {"order_id": order_id}
-    req_json.update(asdict(updated_item, dict_factory=dataclass_ignore_none_factory))
+    req_json.update(asdict(updated_item, dict_factory=dataclass_wm_factory))
     res = requests.put(
         API_BASE_URL + f"/profile/orders/{order_id}",
         json=req_json,
