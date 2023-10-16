@@ -141,7 +141,14 @@ To create order:
 ```python
 sess = wm.auth.signin("your_account", "your_password")
 # new selling order item of "Flame Gland" for 1000 platinum, quantity 1, rank 0 and invisible
-new_item = wm.orders.OrderNewItem("5be5f5a23ffcc7038857f119", wm.common.OrderType.sell, 1000, 1, 1, False)
+new_item = wm.orders.OrderNewItem(
+    item_id="5be5f5a23ffcc7038857f119",
+    order_type=wm.common.OrderType.sell,
+    platinum=1000,
+    quantity=1,
+    rank=0,
+    visible=False,
+)
 new_order = wm.orders.add_order(sess, new_item)
 ```
 

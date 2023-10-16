@@ -33,6 +33,9 @@ jobs:
       run: |
         make black-check
     - name: Test with pytest
+      env:
+        TEST_WM_EMAIL: ${{ secrets.TEST_WM_EMAIL }}
+        TEST_WM_PASSWORD: ${{ secrets.TEST_WM_PASSWORD }}
       run: |
         make test
     - name: Build

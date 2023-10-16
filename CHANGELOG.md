@@ -10,6 +10,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 * Add shpinx documentation page(TODO).
 
+## [1.2.0] - 2023-10-16
+
+### Added
+
+* Add stateful tests for `auth`, `orders` and `profile`.
+
+### Changed
+
+* Fix `Enum` serialization issue in [PR #7](https://github.com/leonardodalinky/pywmapi/pull/7).
+* Use `attrs` and `cattrs` instead of `dataclasses` for better compatibility.
+
 ## [1.1.3] - 2023-10-15
 
 ### Changed
