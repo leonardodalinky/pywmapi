@@ -75,6 +75,7 @@ class OrderItem(OrderCommon):
 
     item: ItemInOrder
     user: Optional[UserShort] = None
+    platform: Platform = None
 
 
 @define(kw_only=True)
