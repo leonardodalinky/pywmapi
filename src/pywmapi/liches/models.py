@@ -1,3 +1,5 @@
+from typing import Optional
+
 from attrs import define
 
 from ..common import *
@@ -14,9 +16,9 @@ class LichWeapon(ModelBase):
     id: str
     url_name: str
     icon: str
-    icon_format: IconFormat
     thumb: str
     item_name: str
+    icon_format: Optional[IconFormat] = None
 
 
 @define
@@ -24,12 +26,12 @@ class LichEphemera(ModelBase):
     id: str
     url_name: str
     icon: str
-    icon_format: IconFormat
     thumb: str
     animation: str
     animation_format: IconFormat
     element: ElementType
     item_name: str
+    icon_format: Optional[IconFormat] = None
 
 
 @define

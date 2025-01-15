@@ -24,8 +24,8 @@ class OrderCommon(ModelBase):
     platinum: int
     quantity: int
     order_type: OrderType
-    platform: Platform
     visible: bool
+    platform: Optional[Platform] = None
     region: Optional[str] = None
     creation_date: Optional[datetime] = None
     closed_date: Optional[datetime] = None

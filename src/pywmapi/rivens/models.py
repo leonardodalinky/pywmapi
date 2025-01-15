@@ -42,6 +42,8 @@ class RivenAttribute(ModelBase):
     class Units(Enum):
         percent = "percent"
         seconds = "seconds"
+        # Not know what this is
+        multiply = "multiply"
 
     id: str
     url_name: str

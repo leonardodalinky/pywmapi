@@ -63,7 +63,7 @@ class Session:
             self._wsapp.run_forever()
 
         self._wsapp_thread = Thread(target=_wsapp_func)
-        self._wsapp_thread.setDaemon(True)
+        self._wsapp_thread.daemon = True
         self._wsapp_thread.start()
 
     def send_str(self, data: str, opcode: int = ABNF.OPCODE_TEXT) -> None:
