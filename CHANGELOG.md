@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 * Add shpinx documentation page(TODO).
 
+## [1.2.1] - 2025-01-15
+
+### Changed
+
+* Fix issues [#11](https://github.com/leonardodalinky/pywmapi/issues/11) and merge [PR #12](https://github.com/leonardodalinky/pywmapi/pull/12).
+
 ## [1.2.0] - 2023-10-16
 
 ### Added
