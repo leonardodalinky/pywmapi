@@ -28,6 +28,7 @@ class ItemFull(ModelBase):
         rare = "rare"
         legendary = "legendary"
         peculiar = "peculiar"
+        archon = "archon"
 
     id: str
     """Item ID."""
