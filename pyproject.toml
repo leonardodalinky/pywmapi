@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pywmapi"
-version = "1.2.1"
+version = "1.2.2"
 authors = [{ name = "leonardodalink", email = "linkyy2000313@gmail.com" }]
 keywords = ["warframe", "warframe market"]
 description = "API for warframe market."
