@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 tmp*.py
+tmp*.sh
 
 # vscode
 .vscode/
