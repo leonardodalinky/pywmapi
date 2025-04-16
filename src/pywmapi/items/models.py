@@ -48,6 +48,8 @@ class ItemFull(ModelBase):
     """Cyan stars count. Only for Ayatan Treasures."""
     amber_stars: Optional[int] = None
     """Amber stars count. Only for Ayatan Treasures."""
+    vaulted: Optional[bool] = None
+    """Vaulted status of a relic. Only for relics."""
     ducats: Optional[int] = None
     set_root: Optional[bool] = None
     mastery_level: Optional[int] = None
