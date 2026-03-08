@@ -28,7 +28,7 @@ def list_items(lang: Language = Language.en) -> List[ItemShort]:
         headers={"Language": lang.value},
     )
     check_wm_response(res)
-    return list(map(lambda x: ItemShort.from_dict(x), res.json()["payload"]["items"]))
+    return list(map(lambda x: ItemShort.from_dict(x), res.json()["data"]))
 
 
 def get_item(url_name: str, platform: Platform = Platform.pc) -> Tuple[ItemFull, List[ItemFull]]:
@@ -46,8 +46,8 @@ def get_item(url_name: str, platform: Platform = Platform.pc) -> Tuple[ItemFull,
         headers={"Platform": platform.value},
     )
     check_wm_response(res)
-    item_json = res.json()["payload"]["item"]
-    return _transform_item_result(item_json)
+    item_json = res.json()["data"]
+    return ItemFull.from_dict(item_json)
 
 
 def get_orders(*args, **kwargs):
@@ -56,7 +56,6 @@ def get_orders(*args, **kwargs):
         "`get_orders` is moved to package `orders` in v1.1. This function would be deprecated in the future."
     )
     from ..orders.api import get_orders
-
     return get_orders(*args, **kwargs)
 
 
@@ -71,3 +70,4 @@ def _transform_item_result(item_json) -> Tuple[ItemFull, List[ItemFull]]:
     if target_item is None:
         raise RuntimeError("could not find item")
     return target_item, items_in_set
+    

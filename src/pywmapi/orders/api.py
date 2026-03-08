@@ -56,13 +56,14 @@ def get_orders(
             as the 2nd and 3rd return value.
     """
     res = requests.get(
-        API_BASE_URL + f"/items/{url_name}/orders",
+        API_BASE_URL + f"/orders/{url_name}",
         params={"include": include.value if include is not None else None},
         headers={"Platform": platform.value},
     )
-    check_wm_response(res)
+    # check_wm_response(res)
+    print(res)
     json_obj = res.json()
-    orders = list(map(lambda x: OrderRow.from_dict(x), json_obj["payload"]["orders"]))
+    orders = list(map(lambda x: OrderRow.from_dict(x), json_obj["data"]))
     if include == IncludeOption.item:
         target_item, items_in_set = _transform_item_result(json_obj["include"]["item"])
         return orders, target_item, items_in_set
