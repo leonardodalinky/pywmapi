@@ -42,7 +42,7 @@ def get_profile_by_username(username: str) -> Profile:
         API_BASE_URL + f"/profile/{username}",
     )
     check_wm_response(res)
-    return Profile.from_dict(res.json()["payload"]["profile"])
+    return Profile.from_dict(res.json()["data"])
 
 
 def set_profile_status(sess: Session, status: ProfileStatus) -> None:
