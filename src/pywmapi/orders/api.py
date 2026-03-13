@@ -60,8 +60,7 @@ def get_orders(
         params={"include": include.value if include is not None else None},
         headers={"Platform": platform.value},
     )
-    # check_wm_response(res)
-    print(res)
+    check_wm_response(res)
     json_obj = res.json()
     orders = list(map(lambda x: OrderRow.from_dict(x), json_obj["data"]))
     if include == IncludeOption.item:
