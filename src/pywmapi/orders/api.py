@@ -56,7 +56,7 @@ def get_orders(
             as the 2nd and 3rd return value.
     """
     res = requests.get(
-        API_BASE_URL + f"/orders/{url_name}",
+        API_BASE_URL + f"/orders/item/{url_name}",
         params={"include": include.value if include is not None else None},
         headers={"Platform": platform.value},
     )

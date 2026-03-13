@@ -22,7 +22,7 @@ def get_current_user(sess: Session) -> User:
         User: user
     """
     res = requests.get(
-        API_BASE_URL + f"/profile",
+        API_BASE_URL + f"/user",
         **sess.to_header_dict(),
     )
     check_wm_response(res)
@@ -39,7 +39,7 @@ def get_profile_by_username(username: str) -> Profile:
         Profile: user profile
     """
     res = requests.get(
-        API_BASE_URL + f"/profile/{username}",
+        API_BASE_URL + f"/user/{username}",
     )
     check_wm_response(res)
     return Profile.from_dict(res.json()["data"])

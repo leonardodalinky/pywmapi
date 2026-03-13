@@ -23,13 +23,12 @@ class Profile(ModelBase):
 
     id: str
     """User ID."""
-    ingameName: str
-    """In-game name."""
+    slug: str
     status: ProfileStatus
     """Wfm status."""
     slug: str
     platform: Platform
-    region: str
+    locale: str
     banned: bool
     avatar: str
     lastSeen: datetime
@@ -39,3 +38,25 @@ class Profile(ModelBase):
     achievementShowcase: Optional[Achievement]
     banMessage: Optional[str] = None
     background: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "ItemShort":
+        return cls(
+            id=data.get("id"),
+            slug=data.get("slug"),
+            icon=data["i18n"]["en"].get("icon"),
+            thumb=data["i18n"]["en"].get("thumb"),
+            tags=data.get("tags"),
+            trading_tax=data.get("tradingTax"),
+            sub_icon=data["i18n"]["en"].get("subIcon"),
+            quantity_for_set=data.get("quantityInSet"),
+            mod_max_rank=data.get("maxRank"),
+            subtypes=data.get("subtypes"),
+            cyan_stars=data.get("cyanStars"),
+            amber_stars=data.get("amberStars"),
+            vaulted=data.get("vaulted"),
+            ducats=data.get("ducats"),
+            set_root=data.get("setRoot"),
+            mastery_level=data.get("reqMasteryRank"),
+            rarity=cls.Rarity(data["rarity"]) if "rarity" in data else None,
+    )

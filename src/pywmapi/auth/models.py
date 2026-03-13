@@ -109,9 +109,9 @@ class UserShort:
 
     id: str
     status: Status
-    region: str
+    locale: str
     reputation: int
-    last_seen: datetime
+    lastSeen: datetime
     ingame_name: Optional[str] = None
     """In-game name. Only get this field when `verification=True`."""
     avatar: Optional[str] = None
