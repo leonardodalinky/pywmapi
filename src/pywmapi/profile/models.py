@@ -27,6 +27,8 @@ class Profile(ModelBase):
     status: ProfileStatus
     """Wfm status."""
     slug: str
+    icon: str
+    thumb: str
     platform: Platform
     locale: str
     banned: bool
@@ -40,23 +42,22 @@ class Profile(ModelBase):
     background: Optional[str] = None
 
     @classmethod
-    def from_dict(cls, data: dict) -> "ItemShort":
+    def from_dict(cls, data: dict) -> "Profile":
         return cls(
             id=data.get("id"),
             slug=data.get("slug"),
-            icon=data["i18n"]["en"].get("icon"),
-            thumb=data["i18n"]["en"].get("thumb"),
-            tags=data.get("tags"),
-            trading_tax=data.get("tradingTax"),
-            sub_icon=data["i18n"]["en"].get("subIcon"),
-            quantity_for_set=data.get("quantityInSet"),
-            mod_max_rank=data.get("maxRank"),
-            subtypes=data.get("subtypes"),
-            cyan_stars=data.get("cyanStars"),
-            amber_stars=data.get("amberStars"),
-            vaulted=data.get("vaulted"),
-            ducats=data.get("ducats"),
-            set_root=data.get("setRoot"),
-            mastery_level=data.get("reqMasteryRank"),
-            rarity=cls.Rarity(data["rarity"]) if "rarity" in data else None,
+            status=ProfileStatus(data.get("status")),
+            icon=data.get("icon"),
+            thumb=data.get("thumb"),
+            platform=Platform(data.get("platform")),
+            locale=data.get("locale"),
+            banned=data.get("banned", False),
+            avatar=data.get("avatar"),
+            lastSeen=datetime.fromisoformat(data.get("lastSeen").replace("Z", "+00:00")),
+            reputation=data.get("reputation"),
+            about=data.get("about"),
+            own_profile=data.get("ownProfile", False),
+            achievementShowcase=data.get("achievementShowcase"),
+            banMessage=data.get("banMessage"),
+            background=data.get("background"),
         )
