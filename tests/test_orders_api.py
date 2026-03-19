@@ -15,7 +15,6 @@ def test_get_orders():
     assert len(result2) > 0
 
 
-
 @pytest.mark.skipif(get_test_signin_dict() is None, reason="No test account.")
 def test_get_current_orders():
     d = get_test_signin_dict()
