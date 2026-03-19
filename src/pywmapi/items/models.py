@@ -25,7 +25,7 @@ class ItemShort(ModelBase):
             id=data["id"],
             slug=data["slug"],
             thumb=data["i18n"]["en"]["thumb"],
-            item_slug=data["i18n"]["en"]["name"],  
+            item_slug=data["i18n"]["en"]["name"],
         )
 
 
@@ -96,4 +96,4 @@ class ItemFull(ModelBase):
             set_root=data.get("setRoot"),
             mastery_level=data.get("reqMasteryRank"),
             rarity=cls.Rarity(data["rarity"]) if "rarity" in data else None,
-    )
+        )

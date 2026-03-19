@@ -59,4 +59,4 @@ class Profile(ModelBase):
             set_root=data.get("setRoot"),
             mastery_level=data.get("reqMasteryRank"),
             rarity=cls.Rarity(data["rarity"]) if "rarity" in data else None,
-    )
+        )

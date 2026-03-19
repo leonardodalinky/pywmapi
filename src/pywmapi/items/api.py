@@ -56,6 +56,7 @@ def get_orders(*args, **kwargs):
         "`get_orders` is moved to package `orders` in v1.1. This function would be deprecated in the future."
     )
     from ..orders.api import get_orders
+
     return get_orders(*args, **kwargs)
 
 
@@ -70,4 +71,3 @@ def _transform_item_result(item_json) -> Tuple[ItemFull, List[ItemFull]]:
     if target_item is None:
         raise RuntimeError("could not find item")
     return target_item, items_in_set
-    
