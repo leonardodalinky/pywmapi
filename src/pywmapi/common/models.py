@@ -14,7 +14,9 @@ __all__ = [
     "WSMessage",
 ]
 
-cattrs.register_structure_hook(datetime, lambda d, _: datetime.fromisoformat(d))
+cattrs.register_structure_hook(
+    datetime, lambda d, _: datetime.fromisoformat(d.rstrip("Z") + "+00:00")
+)
 
 
 def _transform_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
