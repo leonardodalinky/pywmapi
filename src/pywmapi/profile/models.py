@@ -15,30 +15,49 @@ __all__ = [
 class Profile(ModelBase):
     @define
     class Achievement:
-        name: str
+        id: str
         icon: str
         description: str
-        exposed: bool
         # might be always `patreon`
         type: str
 
     id: str
     """User ID."""
-    ingame_name: str
-    """In-game name."""
+    slug: str
     status: ProfileStatus
     """Wfm status."""
+    slug: str
+    icon: str
+    thumb: str
     platform: Platform
-    region: str
+    locale: str
     banned: bool
     avatar: str
-    last_seen: datetime
+    lastSeen: datetime
     reputation: int
     about: str
-    """User's about-me section. Rendered as HTML."""
-    about_raw: str
-    """User's about-me section. Raw text."""
     own_profile: bool
-    achievements: List[Achievement]
-    ban_reason: Optional[str] = None
+    achievementShowcase: Optional[Achievement]
+    banMessage: Optional[str] = None
     background: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "Profile":
+        return cls(
+            id=data.get("id"),
+            slug=data.get("slug"),
+            status=ProfileStatus(data.get("status")),
+            icon=data.get("icon"),
+            thumb=data.get("thumb"),
+            platform=Platform(data.get("platform")),
+            locale=data.get("locale"),
+            banned=data.get("banned", False),
+            avatar=data.get("avatar"),
+            lastSeen=datetime.fromisoformat(data.get("lastSeen").replace("Z", "+00:00")),
+            reputation=data.get("reputation"),
+            about=data.get("about"),
+            own_profile=data.get("ownProfile", False),
+            achievementShowcase=data.get("achievementShowcase"),
+            banMessage=data.get("banMessage"),
+            background=data.get("background"),
+        )

@@ -7,8 +7,12 @@ from tests.test_auth_api import get_test_signin_dict
 
 
 def test_get_orders():
-    get_orders("mirage_prime_systems", include=IncludeOption.item)
-    get_orders("heavy_trauma", include=IncludeOption.item)
+    result1 = get_orders("mirage_prime_systems")
+    assert isinstance(result1, list)
+    assert len(result1) > 0
+    result2 = get_orders("heavy_trauma")
+    assert isinstance(result2, list)
+    assert len(result2) > 0
 
 
 @pytest.mark.skipif(get_test_signin_dict() is None, reason="No test account.")

@@ -7,7 +7,7 @@ from tests.test_auth_api import get_test_signin_dict
 
 
 def test_get_profile_by_username():
-    get_profile_by_username("AyajiLin")
+    get_profile_by_username("megan")
 
 
 @pytest.mark.skipif(get_test_signin_dict() is None, reason="No test account.")

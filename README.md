@@ -16,43 +16,43 @@
 For now, the implemented function is listed below:
 
 * auth
-  * ✅ sign in
+  * 🔲 sign in
   * 🆖 register
   * 🆖 restore password
 * profile
-  * ✅ get current user's profile
+  * 🔲 get current user's profile
   * 🔲 manage current user profile
-  * ✅ get a user's profile
+  * 🔲 get a user's profile
   * 🔲 get all of a user's achievements
   * 🔲 get all of a user's reviews
-  * ✅ set current user's online/offline status
+  * 🔲 set current user's online/offline status
 * items
   * ✅ list all tradable items
   * ✅ get info about an item
 * statistics
-  * ✅ get statistics of an item
+  * 🔲 get statistics of an item
   * 🔲 get global market statistics
 * orders
-  * ✅ get orders of a single item
+  * 🔲 get orders of a single item
   * 🔲 get orders for the last 4 hours
-  * ✅ update a single order on the current profile
-  * ✅ delete a single order on the current profile
-  * ✅ add a new order for the current profile
+  * 🔲 update a single order on the current profile
+  * 🔲 delete a single order on the current profile
+  * 🔲 add a new order for the current profile
   * 🔲 get user's sale statistics(closed orders)
-  * ✅ get all of a user's orders
+  * 🔲 get all of a user's orders
 * liches
-  * ✅ list all lich weapons
-  * ✅ list all lich ephemeras
-  * ✅ list all lich quirks
+  * 🔲 list all lich weapons
+  * 🔲 list all lich ephemeras
+  * 🔲 list all lich quirks
 * rivens
-  * ✅ list all riven items
-  * ✅ get a list of riven attributes
+  * 🔲 list all riven items
+  * 🔲 get a list of riven attributes
 * misc
   * 🔲 get a list of all known game locations
   * 🔲 get a list of all known npcs
   * 🔲 get a list of all known missions
 * auctions
-  * ✅ create auction ⚠️
+  * 🔲 create auction
   * 🔲 get a list of riven auctions by given search params
   * 🔲 get a list of lich auctions by given search params
 * auction entry️

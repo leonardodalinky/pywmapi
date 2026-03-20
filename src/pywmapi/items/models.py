@@ -15,9 +15,18 @@ __all__ = [
 @define
 class ItemShort(ModelBase):
     id: str
-    url_name: str
+    slug: str
     thumb: str
-    item_name: str
+    item_slug: str
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "ItemShort":
+        return cls(
+            id=data["id"],
+            slug=data["slug"],
+            thumb=data["i18n"]["en"]["thumb"],
+            item_slug=data["i18n"]["en"]["name"],
+        )
 
 
 @define
@@ -32,8 +41,8 @@ class ItemFull(ModelBase):
 
     id: str
     """Item ID."""
-    url_name: str
-    """Item URL name."""
+    slug: str
+    """Item URL slug."""
     icon: str
     thumb: str
     tags: List[str]
@@ -66,3 +75,25 @@ class ItemFull(ModelBase):
     es: Optional[LangInItem] = None
     it: Optional[LangInItem] = None
     pl: Optional[LangInItem] = None
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "ItemShort":
+        return cls(
+            id=data.get("id"),
+            slug=data.get("slug"),
+            icon=data["i18n"]["en"].get("icon"),
+            thumb=data["i18n"]["en"].get("thumb"),
+            tags=data.get("tags"),
+            trading_tax=data.get("tradingTax"),
+            sub_icon=data["i18n"]["en"].get("subIcon"),
+            quantity_for_set=data.get("quantityInSet"),
+            mod_max_rank=data.get("maxRank"),
+            subtypes=data.get("subtypes"),
+            cyan_stars=data.get("cyanStars"),
+            amber_stars=data.get("amberStars"),
+            vaulted=data.get("vaulted"),
+            ducats=data.get("ducats"),
+            set_root=data.get("setRoot"),
+            mastery_level=data.get("reqMasteryRank"),
+            rarity=cls.Rarity(data["rarity"]) if "rarity" in data else None,
+        )

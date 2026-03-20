@@ -23,7 +23,7 @@ class OrderCommon(ModelBase):
     id: str
     platinum: int
     quantity: int
-    order_type: OrderType
+    type: OrderType
     visible: bool
     platform: Optional[Platform] = None
     region: Optional[str] = None
@@ -101,7 +101,7 @@ class OrderNewItem(OrderNewItemBase):
     """
 
     item_id: str
-    order_type: OrderType
+    type: OrderType
 
 
 @define(kw_only=True)
