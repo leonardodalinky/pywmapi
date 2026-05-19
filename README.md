@@ -23,8 +23,8 @@ For now, the implemented function is listed below:
   * 🆖 get current user's profile
   * 🆖 manage current user profile
   * ✅ get a user's profile
-  * 🔲 get all of a user's achievements
-  * 🔲 get all of a user's reviews
+  * ✅ get all of a user's achievements
+  * 🆖 get all of a user's reviews
   * 🆖 set current user's online/offline status
 * items
   * ✅ list all tradable items
