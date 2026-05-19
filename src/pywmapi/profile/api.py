@@ -1,3 +1,5 @@
+from typing import List
+
 import requests
 
 from ..auth import Session, User
