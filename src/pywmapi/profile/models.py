@@ -16,6 +16,7 @@ class Profile(ModelBase):
     @define
     class Achievement:
         id: str
+        name:str
         icon: str
         description: str
         # might be always `patreon`
@@ -37,7 +38,6 @@ class Profile(ModelBase):
     reputation: int
     about: str
     own_profile: bool
-    achievementShowcase: Optional[Achievement]
     banMessage: Optional[str] = None
     background: Optional[str] = None
 
@@ -57,7 +57,6 @@ class Profile(ModelBase):
             reputation=data.get("reputation"),
             about=data.get("about"),
             own_profile=data.get("ownProfile", False),
-            achievementShowcase=data.get("achievementShowcase"),
             banMessage=data.get("banMessage"),
             background=data.get("background"),
         )
