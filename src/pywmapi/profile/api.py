@@ -50,7 +50,7 @@ def get_profile_by_username(username: str) -> Profile:
     return Profile.from_dict(res.json()["data"], achievementRes.json()["data"])
 
 
-def get_profile_achievements(username: str) -> List[Achievement]:
+def get_profile_achievements(username: str) -> List[Profile.Achievement]:
     """Get achievements of a specific profile
 
     Args:
