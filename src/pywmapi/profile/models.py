@@ -16,7 +16,7 @@ class Profile(ModelBase):
     @define
     class Achievement:
         id: str
-        name:str
+        name: str
         icon: str
         thumb: str
         description: str
@@ -61,7 +61,7 @@ class Profile(ModelBase):
                     icon=en_data.get("icon"),
                     thumb=en_data.get("thumb"),
                 )
-                
+
                 achievements.append(achievement)
 
         return cls(

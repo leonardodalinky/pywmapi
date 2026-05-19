@@ -42,9 +42,7 @@ def get_profile_by_username(username: str) -> Profile:
     res = requests.get(
         API_BASE_URL + f"/user/{username}",
     )
-    achievementRes = requests.get(
-        API_BASE_URL + f"/achievements/user/{username}" 
-    )
+    achievementRes = requests.get(API_BASE_URL + f"/achievements/user/{username}")
     check_wm_response(res)
     check_wm_response(achievementRes)
     return Profile.from_dict(res.json()["data"], achievementRes.json()["data"])
